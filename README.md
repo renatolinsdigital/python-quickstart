@@ -39,7 +39,7 @@ Python does not have built-in support for constants in the same way that some ot
 PI = 3.14
 ```
 
-### 3. Variables and essential data types in Python:
+### 3. Essential data types in Python:
 
 Variables in Python are containers that store data values. They allow you to assign names to values, making it easier to reference and manipulate data in your code. Python supports several types of variables, each serving a different purpose. So we have commonly used data types such as:
 
