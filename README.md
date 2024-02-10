@@ -80,7 +80,7 @@ person = {
 
 Python variables are dynamically typed, meaning their type is inferred based on the assigned value. This allows for flexibility and simplicity in variable declaration.
 
-NOTE: In Python, lists are fundamental data structures representing ordered and mutable sequences of elements, created using square brackets `[]`. They allow duplicates and are widely used for storing and manipulating collections of items. On the other hand, 'collections' refer to a broader category of data structures beyond lists. This category includes tuples, dictionaries, sets, and the collections module, offering specialized data structures. These collections may offer additional functionality and optimizations tailored to specific use cases. However, understanding collections in depth is not within the scope of this tutorial.
+NOTE: In Python, lists are fundamental data structures representing ordered and mutable sequences of elements, created using square brackets []. They allow duplicates and are widely used for storing and manipulating collections of items. Lists are one of the fundamental collection types in Python, along with other types such as tuples, sets, and dictionaries. However, on the other hand, 'collections' refer to a broader category of data structures. Understanding collections in depth is not within the scope of this tutorial.
 
 ### 4. Operators:
 
