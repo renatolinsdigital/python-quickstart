@@ -29,7 +29,7 @@ A variable is a named storage location in your computer's memory. Think of it as
 message = "Hello, Python!"
 
 # Example of declaring and assigning a variable with numerical value
-number = 42
+my_number = 42
 ```
 
 Python does not have built-in support for constants in the same way that some other programming languages do (such as Java or C++). However, it does have conventions to indicate that a variable should be treated as a constant.
@@ -38,6 +38,8 @@ Python does not have built-in support for constants in the same way that some ot
 # Example of declaring a constant variable
 PI = 3.14
 ```
+
+NOTE: In Python, when naming variables, it's recommended to adhere to a specific naming convention known as __snake_case__. This convention involves writing variable names with all lowercase letters and separating words using underscores. For example, if you want to represent the maximum temperature, you could name a variable as 'max_temperature'. Similarly, if you need to name a constant temperature value, it can be 'BASE_TEMPERATURE'. This is one of the practices that helps improve code readability and consistency, aligning with the conventions outlined in the Python Enhancement Proposal 8 (PEP 8), which is the official style guide for Python code. If you want to known more about Python style of coding, you can refer to __peps.python.org/pep-0008__.
 
 ### 3. Essential data types in Python:
 
