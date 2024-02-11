@@ -282,7 +282,7 @@ Loops provide a convenient means to execute a block of code repeatedly for each 
 
 __'for' loop:__ The `for` loop in Python is a control flow statement used to iterate over a sequence of elements. It's commonly used when you need to perform the same operation on each element of a list, tuple, string, dictionary, set, range, or any other iterable object. Let's see a couple of use cases:
 
-* When we know the range of value in advance
+* When we know the range of values in advance
 
 ```python
 # Print numbers from 1 to 5 using a for loop
