@@ -74,9 +74,9 @@ __Dictionary:__ Represents a collection of key-value pairs.
 
 ```python
 person = {
-  "name": "John",
-  "age": 30,
-  "is_student": False
+    "name": "John",
+    "age": 30,
+    "is_student": False
 }
 ```
 
@@ -247,6 +247,8 @@ if condition:
   # The line above has an extra space at the beginning, it will raise an IndentationError
 ```
 
+The recommended indentation of 4 spaces applies not only to code blocks like functions and loops but also to objects, including classes and dictionaries. Consistently using 4 spaces for indentation helps maintain uniformity and readability throughout a Python codebase.
+
 ### 6. Control Flow II - Falsy and Truthy Values
 
 In Python, values can be broadly categorized into two groups: truthy and falsy.
@@ -257,12 +259,12 @@ __Falsy Values:__ A value is falsy if, in a condition, it's treated as `False`. 
 
 ```python
 if "Hello":
-  # This code will run because "Hello" is truthy
-  print("Truthy!")
+    # This code will run because "Hello" is truthy
+    print("Truthy!")
 
 if 0:
-  # This code won't run because 0 is falsy
-  print("Falsy!")
+    # This code won't run because 0 is falsy
+    print("Falsy!")
 ```
 
 __Default value:__ The 'default value' or 'fallback pattern' is a common practice in Python for assigning a value to a variable if the intended value might be falsy. This pattern often involves using the logical OR (`or`) operator. Here's an example to illustrate the concept:
