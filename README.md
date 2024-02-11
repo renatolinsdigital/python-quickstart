@@ -711,9 +711,22 @@ Visual Studio Code (VS Code) is a powerful code editor developed by Microsoft, k
 
 __Python (by Microsoft)__: Boost your Python development with Microsoft's VS Code extension. Access IntelliSense, linting, debugging, navigation, testing, Jupyter support, and code refactoring in a single, professional package. 
 
+__autopep8 (by Microsoft)__: The Autopep8 VS Code plugin automatically formats Python code to adhere to the PEP 8 style guide within Visual Studio Code. It provides on-the-fly feedback, customizable formatting options, and seamless integration with VS Code, promoting consistent and standardized code formatting.
+
 __Code Spell Checker(by Street Side Software)__:  This extension helps maintain clean and error-free code by highlighting spelling mistakes in comments and strings. It assists in avoiding typos and ensuring code professionalism.
 
-Configuration: VS Code allow you to customize settings, keybindings, and themes according to your preferences. Explore the features provided by VS Code and its plugins to maximize productivity and efficiency in Python development.
+__General Configuration__: VS Code allow you to customize settings, keybindings, and themes according to your preferences. Explore the features provided by VS Code and its plugins to maximize productivity and efficiency in Python development.
+
+NOTE: To enable automatic code formatting with __autopep8__ when saving Python files, create a folder named __.vscode__ in the root directory where your Python scripts are located. Inside this folder, include a file named __settings.json__ with the following configuration:
+
+```json
+{
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true
+  }
+}
+```
 
 3. __Running Python files__
 
