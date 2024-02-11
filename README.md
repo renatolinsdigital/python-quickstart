@@ -728,6 +728,8 @@ NOTE: To enable automatic code formatting with __autopep8__ when saving Python f
 }
 ```
 
+After configuring this, you'll notice that Python's coding style guidelines are automatically applied. This includes maintaining a two-line distance between function definitions, adding spaces around operators, and after commas in function arguments, etc. These automated adjustments can save us a lot of time by eliminating the need to manually adhere to PEP 8.
+
 3. __Running Python files__
 
 With VS Code open, navigate to the desired folder (where your project will be), right-click, and select 'New File'. Name it with a .py extension (e.g., my_script.py). Inside this file, you can write a test code, like the following:
