@@ -798,26 +798,30 @@ Virtual environments in Python allow developers to create isolated environments 
 
 * Activation/Deactivation: Environments can be activated or deactivated as needed, facilitating seamless switching between projects.
 
-If a developer intends to solely use pip and virtual environments for managing Python packages, it's generally advisable to uninstall the global Python installation and any globally installed packages. This ensures a clean separation between the system-wide Python environment and the isolated environments created by virtual environments. So, if you want to follow this path, here is how:
+If you intend to use virtual environments to manage Python packages, it's best to avoid Python and associated packages that are globally installed on your machine. This keeps things separate between your system-wide Python setup and the isolated environments created by virtual environments. Next we will check two common ways to do this.
+
+__Method 1: Using Pip + Virtual environments:__ 
+
+With this method, we manually create virtual environments and specify the dependencies they will hold to run our project. Here's how it's done:
 
 1) Uninstall globally installed packages from your machine, for example: `pip uninstall numpy`. Hit 'Y' if confirmation is required. Optional: Reinstall the globally installed Python, so you get the latest version of PIP. For Windows: Open the Control Panel, go to "Programs" or "Programs and Features", find Python in the list of installed programs, select it, and choose "Uninstall". If you use Linux, you can use a command like `sudo apt-get purge python3`. This will uninstall both Python and PIP. Restart your PC and install Python again going to __python.org/downloads__.
 
 2) Create a Virtual Environment: To create a virtual environment, navigate to your project directory in the terminal and run the following command: `python -m venv myenv`. This command will create a virtual environment named 'myenv' using the venv module in Python. The `-m venv` command is a module invocation. The `-m` flag in Python allows you to run a Python module as a script. In this case, we're running the venv module, which is a built-in module in Python for creating virtual environments. This environment is isolated from the system-wide Python installation and other virtual environments, allowing you to install and manage packages specific to your project.
 
-3) Activate Virtual Environment: After creating the virtual environment, you need to activate it. On Windows, run: `myenv\Scripts\activate`. If you're using Bash, you can run source `source myenv/bin/activate` or `source  myenv\Scripts\activate` (open your myenv folder to check the patch of 'activate' script). After your virtual environment has been activated, you'll see it's name on terminal, e.g. (myenv).
+3) Activate Virtual Environment: After creating the virtual environment, you need to activate it. On Windows, run: `myenv/Scripts/activate`. If you're using Bash, you can run source `source myenv/bin/activate` or `source myenv/Scripts/activate` (open your myenv folder to check the patch of 'activate' script). After your virtual environment has been activated, you'll see it's name on terminal, e.g. (myenv).
 
 4) Install Packages on your virtual environment: Now that your virtual environment is activated, you can use it's own PIP to install Python packages just like you would in a global Python installation. For example, to install numpy, run `pip install numpy`. This will install the numpy package into your virtual environment only. Now you can run and test any script that makes usage of the numpy package.
 
 5) Deactivate Virtual Environment: When you're done working on your project, you can deactivate the virtual environment by running: `deactivate`. In this scenario, numpy is installed only within our virtual environment. Consequently, attempting to execute scripts dependent on numpy outside of this environment will fail.
 
-6) Generate the requirements.txt File: A requirements.txt file is commonly used in Python projects to specify the project's dependencies, including the required packages and their respective versions. Once the virtual environment is activated, use the `pip freeze` command to generate a list of installed packages on that virtual environment and their versions. Then, redirect the output to a requirements.txt file: `pip freeze > requirements.txt`
+6) Generate the requirements.txt File: A requirements.txt file is commonly used in Python projects to specify the project's dependencies, including the required packages and their respective versions. Once the virtual environment is activated, use the `pip freeze` command to generate a list of installed packages on that virtual environment and their versions. Then, redirect the output to a requirements.txt file: `pip freeze > requirements.txt`. It's important to note that after installing new packages in our virtual environment, the requirements.txt file will not be automatically updated. For each new package installed (that will actually be part of our project), we need to update requirements.txt by running the command `pip freeze > requirements.txt` again. Another point to consider is that when uninstalling a package, we also need to manually uninstall any related packages that may have been installed along with it.
 
-7) Document how others will run your project: After working on your project and installing necessary packages in its virtual environment, you won't share the 'myenv' folder or its contents. If you're uploading your project to GitHub, for instance, the 'myenv' folder will be ignored. You'll need to instruct others to:
+7) Document how others will run your project: After working on your project and installing necessary packages in its virtual environment, you won't share the 'myenv' folder or its contents. If you're uploading your project to GitHub, for instance, the 'myenv' folder will have to be ignored. You'll need to instruct others to:
 
 * Download or clone the project.
 * Ensure Python and PIP are installed on their machines.
-* Create a virtual environment using the command python `-m venv myenv`.
-* Activate the virtual environment using `myenv\Scripts\activate` (Windows) or `source myenv/bin/activate` (Bash).
+* Create a virtual environment using the command `python -m venv myenv`.
+* Activate the virtual environment using `myenv/Scripts/activate` (Windows) or `source myenv/bin/activate` (Bash).
 * Install required packages listed in 'requirements.txt' using `pip install -r requirements.txt`.
 
 Following these steps, other developers can work in virtual environments with the same packages and versions specified in your project.
@@ -826,13 +830,13 @@ NOTE: The `-r` flag stands for "read" and is used to specify that pip should rea
 
 Pip and virtual environments are essential for managing Python projects, reducing inconsistencies and challenges, especially in collaborative projects. However, manual management of dependencies can result in inconsistencies and challenges, particularly in larger projects. Therefore, it's worth considering a tool like __Pipenv__.
 
-__Using Pipenv as a package manager (An even better solution)__: Pipenv is a tool designed to address the challenges of dependency management in Python projects. It allows you to create virtual environments for projects, ensuring that dependencies are isolated and specific to each project. By consolidating features from tools like pip and virtualenv, Pipenv simplifies the development process and enhances collaboration on projects.
+__Method 2: Using Pipenv (An even better solution):__ 
 
-Key Features and Benefits of Pipenv:
+Pipenv is a tool designed to address the challenges of dependency management in Python projects. It allows us to create virtual environments for projects, ensuring that dependencies are isolated and specific to each project. By consolidating features from Pip and virtualenv, Pipenv simplifies the development process and enhances collaboration on projects. Key Features and Benefits of Pipenv:
 
 * Virtual Environment Management: Automatically creates and manages virtual environments for projects, eliminating the need to manage them separately using tools like virtualenv.
 
-* Dependency Management: Defines project dependencies in a Pipfile, specifying package names and versions explicitly. This ensures consistency across installations and prevents compatibility issues.
+* Holistic Dependency Management: When uninstalling a package with Pipenv, it automatically removes related and unused dependencies, offering a more comprehensive approach compared to traditional methods like virtual environments and requirements.txt. This ensures a cleaner environment with only necessary dependencies installed.
 
 * Deterministic Builds: Generates a Pipfile.lock file that records exact versions of dependencies, ensuring consistent builds across environments and preventing unexpected behavior due to automatic upgrades.
 
@@ -840,7 +844,7 @@ Key Features and Benefits of Pipenv:
 
 * Ease of Use: Simplifies the workflow by consolidating common tasks into a single command-line tool, streamlining dependency management and project setup.
 
-Pipenv streamlines the process of managing Python dependencies, making it a valuable tool for developers working on projects of any scale.
+Pipenv streamlines the process of managing Python dependencies, making it a valuable tool for developers working together.
 
 
 
