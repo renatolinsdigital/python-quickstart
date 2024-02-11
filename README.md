@@ -203,17 +203,31 @@ message_to_display = ""
 # Ternary operator
 message_to_display = "Go for a walk!" if weather_is_nice else "Stay indoors."
 
-# Output the result
-print(message_to_display)  # Output will be "Go for a walk!" if weather is nice, otherwise "Stay indoors."
+
+print(message_to_display)  # Output: "Go for a walk!"
 ```
 
-You can also chain multiple ternary operators together to mimic else if behavior. For example:
+You can also chain multiple operators to create one-liner if-else statements. For example:
 
 ```python
+score = 78
 result = "A" if score >= 90 else "B" if score >= 80 else "C" if score >= 70 else "D" if score >= 60 else "F"
+print(result) # Output: C
 ```
 
-However, chaining too many ternary operators like this can reduce readability. In some cases, using if statements or refactoring the code might lead to clearer and more maintainable code.
+However, it is important to mention that chaining too many operators in one line can reduce readability. In some cases, using regular `if` statements or refactoring the code might lead to clearer and more maintainable code. Additionally, we can consider using parentheses to refactor the code above and enhance readability.
+
+```python
+score = 78
+result = (
+    "A" if score >= 90 else
+    "B" if score >= 80 else
+    "C" if score >= 70 else
+    "D" if score >= 60 else
+    "F"
+)
+print(result) # Output: C
+```
 
 __IMPORTANT NOTE:__ Python uses indentation to define blocks of code, such as those within conditions or functions. It's a crucial part of Python syntax for structuring code and determining the scope of what will be executed. The standard convention is to use four spaces for each level of indentation. Here's a brief example:
 
