@@ -695,13 +695,15 @@ Ps. A generator expression is a compact and memory-efficient means of creating i
 
 To start, you need to install Python on your computer. Follow the steps below:
 
-a. Go to the official Python website at __python.org__.
+a. Go to the official Python website at __python.org/download__.
 
 b. Click on the download button for the latest version of Python compatible with your operating system (Windows, macOS, or Linux).
 
 c. Run the downloaded installer and follow the on-screen instructions to complete the installation. Make sure to check the option "Add Python X.X to PATH" to easily access Python from the terminal.
 
 d. After installation, open the terminal (Command Prompt on Windows, Terminal on macOS and Linux) and type `python --version` to verify if Python was installed correctly and which version is being run.
+
+By now, we can run Python directly from the command line by using the python command. This opens the Python interpreter, indicated by the `>>>` prompt. From here, we can execute Python commands. For example, typing `2 + 3` will display `5` in the terminal. To exit the Python interpreter, we can type `exit()` or press Ctrl + Z followed by ENTER.
 
 2. __Installing Visual Studio Code and Essential Plugins for Python Development__
 
@@ -741,7 +743,7 @@ result = num1 + num2
 print("The sum of", num1, "and", num2, "is:", result)
 ```
 
-Once you're in the directory containing your Python file, you can run it by typing `python my_script.py`
+Once you're in the directory containing your Python file, you can run it by typing `python my_script.py`.
 
 4. __Understanding and installing Python packages__
 
@@ -786,7 +788,7 @@ NOTE: Use `pip2` when you want to specifically install packages for Python 2.x v
 
 5. __Installing Python and packages in virtual environments - for serious and collaborative development__
 
-Virtual environments in Python allow developers to create isolated environments for projects, managing dependencies separately. Here's an overview:
+In Python, an "environment" is the context in which a Python program runs. It includes an interpreter and any installed packages. Virtual environments allow developers to create isolated coding environments for projects, managing dependencies separately. Here's an overview on how it works:
 
 * Isolation: Virtual environments segregate packages from the system-wide Python installation, preventing conflicts. Consequently, we don't need to concern ourselves with varying Python versions installed on individual developers' machines.
 
@@ -794,11 +796,11 @@ Virtual environments in Python allow developers to create isolated environments 
 
 * Portability: Environments can be easily shared, ensuring consistent setups for collaborators.
 
-* Version Management: Different Python versions and packages can be used for each project, ensuring granular control and preventing conflicts.
+* Python Version Management: Different Python versions and packages can be used for each project, ensuring granular control and preventing conflicts.
 
-* Activation/Deactivation: Environments can be activated or deactivated as needed, facilitating seamless switching between projects.
+* Activation/Deactivation: Environments can be activated or deactivated as needed, facilitating seamless switching between projects and related dependencies.
 
-If you intend to use virtual environments to manage Python packages, it's best to avoid Python and associated packages that are globally installed on your machine. This keeps things separate between your system-wide Python setup and the isolated environments created by virtual environments. Next we will check two common ways to do this.
+If you intend to use virtual environments to manage Python packages, it's best to avoid Python and associated packages that are globally installed on your machine. This keeps things separate between your system-wide Python setup and the isolated environments. Next we will check two common ways to do this.
 
 __Method 1: Using Pip + Virtual environments:__ 
 
@@ -823,6 +825,7 @@ With this method, we manually create virtual environments and specify the depend
 * Create a virtual environment using the command `python -m venv myenv`.
 * Activate the virtual environment using `myenv/Scripts/activate` (Windows) or `source myenv/bin/activate` (Bash).
 * Install required packages listed in 'requirements.txt' using `pip install -r requirements.txt`.
+* Execute your project's entry point, for example `python main.py`.
 
 Following these steps, other developers can work in virtual environments with the same packages and versions specified in your project.
 
@@ -844,7 +847,60 @@ Pipenv is a tool designed to address the challenges of dependency management in 
 
 * Ease of Use: Simplifies the workflow by consolidating common tasks into a single command-line tool, streamlining dependency management and project setup.
 
-Pipenv streamlines the process of managing Python dependencies, making it a valuable tool for developers working together.
+As seen above, Pipenv simplifies Python dependency management, particularly for collaborative projects. 
+
+Now we will start using Pipenv by following these steps:
+
+1) Uninstall virtual env with `pip uninstall virtualenv` then remove your virtual environment files like 'myenv' folder and 'requirements.txt'. This prevents conflicts and ensures Pipenv manages dependencies smoothly. 
+
+2) Install Pipenv on your machine with: `pip install pipenv`. 
+
+3) Create the virtual environment: A virtual environment will be created by running `pipenv --python <python_version>`. For instance, `pipenv --python 3` will consider the latest version of Python 3 that is installed on your machine. By using `pipenv --python 3.8` for example, Pipenv will select Python 3.8 if it's installed on your machine. After creating the virtual environment, Pipenv will also generate the 'Pipfile' used to specify the project's packages/dependencies.
+
+Note 1: If the specified version is not available, pipenv will select the closest version installed on your machine. It's important to note that Python doesn't include a built-in version manager. To use a specific Python version, you must manually install it and update the system's PATH, or utilize tools like __pyenv__ or __pyenv-win__.
+
+Note 2: By default, Pipenv creates virtual environments in your system, usually within the '.virtualenvs' folder under your user directory. While creating a '.virtualenv' folder in your project directory can be beneficial, it's not mandatory, so this tutorial won't cover this type of configuration.
+
+4) Activate the virtual environment by using the command `pipenv shell`. After this step, you may notice that the title of your terminal has changed to 'pipenv'.
+
+5) Confirm that a virtual environment associated with your project has been created: `pipenv --venv`. This command will display the path of the virtual environment created on your machine.
+
+6) Install dependencies as needed: Install any package that is to be used with `pipenv` command, for example: `pipenv install numpy`. Note that this will generate a Pipfile.lock file as well, which aids in internal tracking of dependency relationships. Once packages are installed within a virtual environment context, they will belong to that environment only. It is important to mention that some packages assist developers in tasks like code linting and testing, while others are essential for the application's functionality, like a math library in a math application. To install a package for development purposes, use the `--dev` flag or its shorthand `-D`. For instance: `pipenv install pytest -D`.
+
+7) Uninstall dependencies as needed: To do this, you can execute the command `pipenv uninstall <package_name>`, for example: `pipenv uninstall numpy`.
+
+8) Feel free to manage environments and dependencies: When you're finished working on the project and wish to exit its corresponding virtual environment, you can do so with the `exit` command. To reactivate the virtual environment, simply use the `pipenv shell` command again. If you need to recreate your virtual environment or have downloaded someone's project without an associated virtual environment, you can run `pipenv install` where the Pipfile resides. This command will both create the virtual environment on your machine and download the necessary packages. Afterwards, running the `pipenv shell` command will have you ready code on that project's virtual environment. By doing so, the Pipfile will place development dependencies under the [dev-packages] section. 
+
+NOTE 1: Although the Pipfile itself does not explicitly specify the location of the virtual environment, Pipenv uses the information in the Pipfile to determine the Python version and dependencies for the project and then locates or creates the associated virtual environment accordingly.
+
+NOTE 2: If you're working on a project that requires a Python version you don't have installed, you'll need to manually install that version and update the system's PATH, as previously mentioned. It's advisable to do this before executing `pipenv install`, which sets up the virtual environment.
+
+9) Document how others will run your project: If you plan to upload your project to a Git platform, you'll need to instruct others to:
+
+* Download or clone the project.
+* Have Python and PIP installed on their machines.
+* Install Pipenv with `pip install pipenv`.
+* Install dependencies while creating a virtual environment: `pipenv install` (This step relies on the Pipfile).
+* Activate project's virtual environment with `pipenv shell` and exit it with the `exit` command.
+* Execute your project's entry point, for example `python main.py`.
+
+NOTE: As you may have noticed, Pipfile and Pipfile.lock are crucial for maintaining consistency in dependency management within collaborative projects. These files are important for your project and must be included when pushing code to a repository.
+
+In summary:
+
+* Install Pipenv on your machine with `pip install pipenv`.
+* Create a virtual environment with `pipenv --python 3`.
+* Activate/reactivate a virtual environment  with `pipenv shell`.
+* Confirm virtual environment creation path with `pipenv --venv`.
+* Install regular dependencies using `pipenv install <package_name>`.
+* Install development dependencies using `pipenv install <package_name> --dev` or `pipenv install <package_name> -D`.
+* Uninstall dependencies with `pipenv uninstall <package_name>`.
+* Exit virtual environments with `exit`. 
+* Run `pipenv install` in the project directory to establish a virtual environment and download project's dependencies.
+
+
+
+
 
 
 
