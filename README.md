@@ -691,6 +691,8 @@ Ps. A generator expression is a compact and memory-efficient means of creating i
 
 ### BONUS - Installing and running Python on your machine
 
+Installing Python on your machine provides offline access, improved performance, efficient resource utilization, customization, seamless integration with local tools, and the flexibility to run any desired version on your preferred machine. Moreover, it unlocks powerful capabilities such as automating tasks, creating servers, controlling devices connected to the PC, etc., expanding the possibilities provided by browser interpreters in countless ways. Now, let's explore how we can run Python on our machines, unlocking its full potential for use.
+
 1. __Installing Python__: 
 
 To start, you need to install Python on your computer. Follow the steps below:
