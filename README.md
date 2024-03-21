@@ -2,7 +2,9 @@
 
 Python was initially created by Guido van Rossum in 1991 with the intention of creating a language that emphasizes code readability and simplicity. Over the years, Python has grown to become one of the most popular and versatile programming languages, utilized in web development, data analysis, artificial intelligence, scientific computing, and more.
 
-### 1. Considerations - Why to learn Python
+---
+
+### 1. Considerations: Why to learn Python
 
 __Versatility Across Domains:__ Python is indispensable in various domains such as web development, data science, machine learning, automation, and scientific computing, demonstrating its broad applicability.
 
@@ -19,6 +21,8 @@ __Active Community and Support:__ Python enjoys a vibrant and supportive communi
 __Abundance of Job Opportunities:__ Proficiency in Python opens doors to a wide range of career opportunities in industries such as technology, finance, healthcare, and academia, thanks to its widespread adoption and versatility.
 
 Ps. If you're new to Python and looking for a coding environment, consider using __pythononlinecompiler.com__ or __trinket.io__ to write and execute Python code interactively. These platforms offer a convenient way to experiment with Python syntax and observe the output of your code.
+
+---
 
 ### 2. Variables:
 
@@ -40,6 +44,8 @@ PI = 3.14
 ```
 
 NOTE: In Python, when naming variables, it's recommended to adhere to a specific naming convention known as __snake_case__. This convention involves writing variable names with all lowercase letters and separating words using underscores. For example, if you want to represent the maximum temperature, you could name a variable as 'max_temperature'. Similarly, if you need to name a constant temperature value, it can be 'BASE_TEMPERATURE'. This is one of the practices that helps improve code readability and consistency, aligning with the conventions outlined in the Python Enhancement Proposal 8 (PEP 8), which is the official style guide for Python code. If you want to known more about Python style of coding, you can refer to __peps.python.org/pep-0008__.
+
+---
 
 ### 3. Essential data types in Python:
 
@@ -83,6 +89,8 @@ person = {
 Python variables are dynamically typed, meaning their type is inferred based on the assigned value. This allows for flexibility and simplicity in variable declaration.
 
 NOTE: In Python, lists are fundamental data structures representing ordered and mutable sequences of elements, created using square brackets []. They allow duplicates and are widely used for storing and manipulating collections of items. Lists are one of the fundamental collection types in Python, along with other types such as tuples, sets, and dictionaries. However, on the other hand, 'collections' refer to a broader category of data structures. Understanding collections in depth is not within the scope of this tutorial.
+
+---
 
 ### 4. Operators:
 
@@ -152,6 +160,8 @@ full_name = f"{first_name} {last_name}"  # 'John Doe'
 greeting = f"Hello, {first_name}!"       # 'Hello, John!'
 profile = f"Name: {full_name}, Age: {age}"  # 'Name: John Doe, Age: 30'
 ```
+
+---
 
 ### 5. Control Flow in Python - 'if' Statement
 
@@ -249,6 +259,8 @@ if condition:
 
 The recommended indentation of 4 spaces applies not only to code blocks like functions and loops but also to objects, including classes and dictionaries. Consistently using 4 spaces for indentation helps maintain uniformity and readability throughout a Python codebase.
 
+---
+
 ### 6. Control Flow II - Falsy and Truthy Values
 
 In Python, values can be broadly categorized into two groups: truthy and falsy.
@@ -275,6 +287,8 @@ message = my_var or "Default Value"
 
 print(message)  # Output: "Hello, World!"
 ```
+
+---
 
 ### 7. Control flow III - Loops
 
@@ -363,6 +377,8 @@ for i in range(1, 6):
 
 __IMPORTANT CONSIDERATION:__ Loops are one of the most frequently used features in any programming language, and Python provides these and other ways to loop through values. Having a good understanding of loops (in any language) is never a 'time wasted,' considering how often they are used.
 
+---
+
 ### 8. Control flow IV - match-case statements
 
 The `match-case` statement in Python makes value evaluation straightforward. Unlike some languages, Python avoids the `switch-case` structure in favor of clear and readable `if-elif-else` statements. Yet, managing many conditions with `if-elif-else` can get hard to maintain. That's where Python's answer comes in: the `match-case` statement introduced in __Python 3.10__. Let's see how it workd by the following example:
@@ -434,6 +450,8 @@ Both functions and lambda functions will be covered next.
 
 __Performance considerations:__ In overall performance, the `match-case` statement and `if-elif-else` statements tend to be better optimized and more efficient compared to the approach using dictionaries, lambda functions, and a mapping function. However, the differences in performance between these approaches are generally minimal for most applications, and other factors such as readability, maintainability, and adherence to Python best practices should also be considered when choosing the most suitable approach for a specific scenario.
 
+---
+
 ### 9. Basics of functions
 
 In Python, functions are blocks of reusable code that can be defined and called upon to perform specific tasks. They play a crucial role in organizing and structuring code, promoting reusability, and enhancing maintainability. There are two common ways to define functions in Python: function definitions and lambda functions.
@@ -494,6 +512,8 @@ print(my_variable)  # This will raise a NameError
 # Defining the variable after the attempt
 my_variable = 42
 ```
+
+---
 
 ### 10. String Manipulation - Essential Techniques and Functions
 
@@ -580,9 +600,11 @@ In Python, a plethora of string methods, including `.find()`, `.split()`, `.star
 
 Ps. For a deeper understanding in string manipulation, consider exploring the Python Language Reference, which provides detailed insights into the language's specifications.
 
-### 11. Common methods for processing iterables
+---
 
-Python provides powerful tools like `map()`, `filter()`, and `reduce()` for processing iterables efficiently. These methods align with functional programming principles, promoting clarity, immutability, and composability in code. Benefits are:
+### 11. Processing Iterables with .map() and .filter() 
+
+Python provides powerful tools like `map()`, `filter()` (as well as many others) for processing iterables efficiently. These methods align with functional programming principles, promoting clarity, immutability, and composability in code. Benefits are:
 
 * Clarity: Expressive operations like mapping and filtering make code easier to understand.
 * Immutability: Working with immutable data structures reduces bugs and simplifies debugging.
@@ -590,55 +612,9 @@ Python provides powerful tools like `map()`, `filter()`, and `reduce()` for proc
 * Testability: Stateless functions facilitate unit testing, ensuring code reliability.
 * Parallelism: Functional programming supports parallel and concurrent execution, enhancing performance.
 
-By embracing these methods and principles, developers can craft cleaner, more efficient codebases that are easier to maintain and scale. As this tutorial targets beginners, we'll focus solely on the methods `map()` and `filter()`.
+By embracing these methods and principles, developers can craft cleaner, more efficient codebases that are easier to maintain and scale. 
 
-__map():__ In Python, the `map()` function can transform any iterable, not just lists. It can operate on tuples, sets, dictionaries, strings, and other iterable objects. The function applies a specified function to each item in the iterable and returns an iterator containing the results.
-
-Example: Doubling each element in a list
-
-```python
-# Define a function to add 1 to a number
-def add_one(x):
-    return x + 1
-
-# Example: Using map with a list
-numbers = [1, 2, 3, 4, 5]
-
-# Apply add_one function to each item in the list using map
-mapped_numbers = map(add_one, numbers)
-
-# Convert the mapped_numbers iterator to a list (iterable)
-result = list(mapped_numbers)
-
-# Output the result
-print(result)  # Output: [2, 3, 4, 5, 6]
-```
-
-__filter():__ The `filter()` method in Python allows you to selectively filter elements from an iterable based on a specified condition. It takes two arguments: a function that returns a Boolean value (`True` or `False`), and an iterable. The function is applied to each item in the iterable, and only items for which the function returns True are included in the result.
-
-Example: Filtering even numbers from a list
-
-```python
-# Define a function to check if a number is even
-def is_even(x):
-    return x % 2 == 0
-
-# Example: Using filter with a list
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-# Apply is_even function to each item in the list using filter
-filtered_numbers = filter(is_even, numbers)
-
-# Convert the filtered_numbers iterator to a list (iterable)
-result = list(filtered_numbers)
-
-# Output the result
-print(result)  # Output: [2, 4, 6, 8, 10]
-```
-
-__Iterables vs. Iterators__: While processing iterables, it's crucial to distinguish between an iterable and an iterator. An iterable, such as a list or string, is anything you can loop over. On the other hand, an iterator is a special object that facilitates looping over an iterable. Iterators provide access to each item in the sequence one at a time. The `next()` function is used to advance the iterator to the next item and return it.
-
-Iterable Example:
+__Iterables vs. Iterators__: Before exploring `.map()` and `.filter()`, it's crucial to understand the concepts of iterators, as well as the distinction between an iterable and an iterator. An iterable, like a list or string, refers to anything you can loop over. Conversely, an iterator is a specific object designed to aid in looping over an iterable. Iterators grant access to individual items in the sequence one by one. The `next()` function plays a key role in advancing the iterator to the next item and retrieving it. For example:
 
 ```python
 # Iterable: List
@@ -669,31 +645,57 @@ print(next(my_iterator))  # Output: 5
 # print(next(my_iterator))  # Uncommenting this line would raise StopIteration
 ```
 
-As `next()` advances the iterator to the next item and returns that item, we can utilize it to find values within our iterable. Example:
+__map():__ In Python, the `map()` function can transform any iterable, not just lists. It can operate on tuples, sets, dictionaries, strings, and other iterable objects. The function applies a specified function to each item in the iterable and returns an iterator containing the results.
+
+Example: Doubling each element in a list
 
 ```python
-# Create an iterator from a list of numbers
-numbers = iter([10, 20, 30, 40, 50])
+# Define a function to add 1 to a number
+def add_one(x):
+    return x + 1
 
-# The expression (num for num in numbers if num > 25) is a generator expression 
-# that yields numbers from the iterator that are higher than 25
+# Example: Using map with a list
+numbers = [1, 2, 3, 4, 5]
 
-# The next() function retrieves the next item from the generator expression
+# Apply add_one function to each item in the list using map
+mapped_numbers = map(add_one, numbers)
 
-# If no such number is found, it returns the default value None
-found_number = next((num for num in numbers if num > 25), None)
+# Convert the mapped_numbers iterator to a list (iterable)
+result = list(mapped_numbers)
 
-# Print the found number
-print(found_number)  # Output: 30
+# Output the result
+print(result)  # Output: [2, 3, 4, 5, 6]
 ```
 
-Ps. A generator expression is a compact and memory-efficient means of creating iterators in Python. It operates similarly to list comprehensions but generates values lazily, without constructing the entire sequence in memory. This allows for efficient processing of large datasets or infinite sequences, as values are produced on-the-fly as needed. Generator expressions are often used in conjunction with the `iter()` function to create iterators from iterables, enabling seamless integration with other iterator-based operations and enhancing code readability and efficiency.
+__filter():__ The `filter()` function in Python takes two arguments: a function and an iterable. It applies the function to each element in the iterable and returns an iterator containing only the elements for which the function returns `True`. If no function is provided, `filter()` uses the default behavior of considering truthy values for filtering.
+
+Example: Filtering even numbers from a list
+
+```python
+# Define a function to check if a number is even
+def is_even(x):
+    return x % 2 == 0
+
+# Example: Using filter with a list
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Apply is_even function to each item in the list using filter
+filtered_numbers = filter(is_even, numbers)
+
+# Convert the filtered_numbers iterator to a list (iterable)
+result = list(filtered_numbers)
+
+# Output the result
+print(result)  # Output: [2, 4, 6, 8, 10]
+```
+
+---
 
 ### BONUS - Installing and running Python on your machine
 
 Installing Python on your machine provides offline access, improved performance, efficient resource utilization, customization, seamless integration with local tools, and the flexibility to run any desired version on your preferred machine. Moreover, it unlocks powerful capabilities such as automating tasks, creating servers, controlling devices connected to the PC, etc., expanding the possibilities provided by browser interpreters in countless ways. Now, let's explore how we can run Python on our machines, unlocking its full potential for use.
 
-1. __Installing Python__: 
+1. __Installing Python__
 
 To start, you need to install Python on your computer. Follow the steps below:
 
@@ -900,17 +902,17 @@ In summary:
 * Exit virtual environments with `exit`. 
 * Run `pipenv install` in the project directory to establish a virtual environment and download project's dependencies.
 
+10) Using `requirements.txt` alongside Pipenv:
 
+Although your project is managed with Pipenv, you may still want to run `pip freeze > requirements.txt` to export the current list of installed packages along with their versions to a __requirements.txt__ file. This can be beneficial for sharing your project with individuals who do not use Pipenv or for deployment on platforms that rely on __requirements.txt__ for package installation. 
 
+It's possible for your virtual environment created with Pipenv to have 'ghost dependencies,' which can lead to unnecessary entries in the requirements.txt file. If you encounter this issue, you can take the following steps:
 
+* Save your `Pipfile` (or its content) in a safe location to preserve your project's dependencies.
+* Exit the virtual environment using `exit`, and delete it with `pipenv --rm` to remove the existing environment entirely.
+* Create and activate a new virtual environment with Pipenv using `pipenv --python 3` followed by `pipenv shell`.
+* Update the Pipfile with any specific package versions or configurations required for your project.
+* Install the dependencies specified in the updated Pipfile using `pipenv install`.
+* Finally, generate a clean __requirements.txt__ file by running `pip freeze > requirements.txt` to reflect the current state of your dependencies in the new virtual environment.
 
-
-
-
-
-
-
-
-
-
-
+Following these steps helps ensure that you start with a clean and well-defined virtual environment, without any unnecessary or unwanted dependencies, and generate an accurate __requirements.txt__ file for sharing or deployment purposes.

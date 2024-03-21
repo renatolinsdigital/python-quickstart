@@ -1,4 +1,6 @@
-my_script.py
+*.py
 TODO.txt
 Pipfile
 Pipfile.lock
+tests/
+requirements.txt
