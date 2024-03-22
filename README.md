@@ -128,6 +128,17 @@ __tuple(value)__: This function converts `value` to a tuple. It can convert list
 
 __set(value)__: This function converts `value` to a set. It can convert lists, tuples, strings, and other iterable objects into a set, removing any duplicate elements.
 
+There are several other built-in functions that perform type conversions or checks. Here are some additional type conversion functions and related built-in functions:
+
+```python
+complex_value = complex(10)  # Convert to complex number
+char = chr(65)  # Convert Unicode code point to character
+unicode_code = ord('A')  # Convert character to Unicode code point
+bytes_data = bytes("hello", encoding='utf-8')  # Convert string to bytes
+bytearray_data = bytearray("hello", encoding='utf-8')  # Convert string to bytearray
+obj_repr = repr([1, 2, 3])  # Get string representation of an object
+```
+
 ---
 
 ### 5. Operators
