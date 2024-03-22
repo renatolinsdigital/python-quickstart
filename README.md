@@ -254,7 +254,6 @@ These are basic examples, and `if` statements can become more complex with logic
 Python has a ternary operator, often referred to as a conditional expression. It follows the syntax: `x if condition else y`. Let's see:
 
 ```python
-# Define variables
 temperature = 25
 weather_is_nice = True
 message_to_display = ""
@@ -274,7 +273,9 @@ result = "A" if score >= 90 else "B" if score >= 80 else "C" if score >= 70 else
 print(result) # Output: C
 ```
 
-However, it is important to mention that chaining too many operators in one line can reduce readability. In some cases, using regular `if` statements or refactoring the code might lead to clearer and more maintainable code. Additionally, we can consider using parentheses to refactor the code above and enhance readability.
+However, it is important to mention that chaining too many operators in one line can reduce readability. In some cases, using regular `if` statements or refactoring the code might lead to clearer and more maintainable code. Additionally, we can consider using a series of ternary expressions to enhance readability.
+
+This can be done line this:
 
 ```python
 score = 78
@@ -287,6 +288,20 @@ result = (
 )
 print(result) # Output: C
 ```
+
+Or like this:
+
+```python
+score = 78
+result = "A" if score >= 90 else \
+         "B" if score >= 80 else \
+         "C" if score >= 70 else \
+         "D" if score >= 60 else \
+         "F"
+print(result) # Output: C
+```
+
+In terms of functionality and outcome, the difference between the two code snippets above is purely aesthetic. Both snippets achieve the same result and execute the same conditional logic. The choice between them often comes down to personal preference and coding style guidelines in a given project or team.
 
 __IMPORTANT NOTE:__ Python uses indentation to define blocks of code, such as those within conditions or functions. It's a crucial part of Python syntax for structuring code and determining the scope of what will be executed. The standard convention is to use four spaces for each level of indentation. Here's a brief example:
 
