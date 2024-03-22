@@ -86,9 +86,26 @@ person = {
 }
 ```
 
+__Tuple:__ A Python tuple is an ordered collection defined with parentheses `()`. Tuples are immutable, meaning their elements cannot be changed, added, or removed after creation.
+
+```python
+my_tuple = (1, 2, 3, 'hello', True)
+print(my_tuple[0])  # Output: 1
+print(my_tuple[3])  # Output: 'hello'
+```
+
+__Set:__ A set in Python is an unordered collection of unique elements. It is defined by curly braces `{}` and can contain various data types.
+
+```python
+my_set = {1, 2, 3, 4, 5}
+my_set.add(6) # Add element 6 to the set (will be added as it is unique)
+my_set.add(2)  # Adding a duplicate element (won't be added again)
+my_set.remove(3) # Removing elements from the set
+```
+
 Python variables are dynamically typed, meaning their type is inferred based on the assigned value. This allows for flexibility and simplicity in variable declaration.
 
-NOTE: In Python, lists are fundamental data structures representing ordered and mutable sequences of elements, created using square brackets []. They allow duplicates and are widely used for storing and manipulating collections of items. Lists are one of the fundamental collection types in Python, along with other types such as tuples, sets, and dictionaries. However, on the other hand, 'collections' refer to a broader category of data structures. Understanding collections in depth is not within the scope of this tutorial.
+NOTE: In Python, lists are ordered sequences of elements, defined using square brackets `[]`. Elements in a list can be modified, added, or removed after creation. Collections, on the other hand, refer to a broader category of data structures in Python, which includes sets, dictionaries, and tuples. Unlike lists, collections can have different characteristics and properties depending on the specific type. For instance, sets have unique elements, dictionaries have key-value pairs, and tuples are immutable.
 
 ---
 
@@ -602,7 +619,247 @@ Ps. For a deeper understanding in string manipulation, consider exploring the Py
 
 ---
 
-### 11. Processing Iterables with .map() and .filter() 
+### 11. String Formatting
+
+Here are four common ways of formatting strings in Python:
+
+__Using the `%` Operator__: 
+
+This is one of the older methods of string formatting in Python. It involves using the % operator followed by a tuple of values to insert into the string.
+
+```python
+name = "Alice"
+age = 30
+formatted_string = "My name is %s and I am %d years old." % (name, age)
+print(formatted_string)
+```
+
+In this example, `%s` is used for string substitution and `%d` is used for integer substitution. This method is somewhat limited compared to newer methods like f-strings and `.format`.
+
+__Using `.format` Method__: 
+
+Introduced in Python 2.6 and widely used in Python 3.x, the `.format` method provides more flexibility and readability than `%` formatting.
+
+```python
+name = "Bob"
+age = 25
+formatted_string = "My name is {} and I am {} years old.".format(name, age)
+print(formatted_string)
+```
+
+Here, `{}` acts as a placeholder for the values provided in the `.format` method. You can also specify the order of insertion or use named placeholders for more complex formatting.
+
+__Using f-Strings (Formatted String Literals)__:
+
+Introduced in Python 3.6, f-strings provide a more concise and readable way to format strings by prefixing the string with `f` or `F` and embedding expressions directly within curly braces `{}`.
+
+```python
+name = "Charlie"
+age = 35
+formatted_string = f"My name is {name} and I am {age} years old."
+print(formatted_string)
+```
+
+The expressions within `{}` are evaluated at runtime, making f-strings very convenient for complex formatting and variable interpolation.
+
+__Using Template Strings__:
+
+The `string.Template` class provides a simple and convenient way to perform string substitution using placeholders.
+
+```python
+from string import Template
+
+name = "David"
+age = 40
+template = Template("My name is $name and I am $age years old.")
+formatted_string = template.substitute(name=name, age=age)
+print(formatted_string)
+```
+
+Here, `$name` and `$age` are placeholders that are replaced by values provided in the substitute method. Template strings are useful when you want to ensure that only specific variables are substituted, avoiding accidental substitutions.
+
+When considering string formatting methods in Python, each has its advantages influenced by factors such as Python version compatibility, readability, and personal preference. However, for modern Python development, F-strings are typically preferred due to their simplicity, readability, and flexibility. They are concise and straightforward, evaluating expressions within `{}` at runtime for clearer code understanding. Additionally, F-strings accommodate any valid Python expression within `{}`, enhancing their versatility for complex formatting needs. Moreover, they offer superior performance compared to `%` formatting and `.format` method, particularly noticeable with large strings or repeated formatting tasks.
+
+---
+
+### 12. Understanding 'in' Better:
+
+In Python, the `in` keyword is used as an operator to test if a value is present in a sequence (such as a list, tuple, string, or set). It is not a reserved word like `if` or `for`, but rather an operator that checks for membership in a collection. The in operator works with a wide range of iterable types, making it a versatile tool for checking if an element exists within a any iterable. To exemplify:
+
+__Strings__:
+```python
+my_string = "Hello, World!"
+if 'o' in my_string:
+    print("'o' is in the string")
+```
+
+__Lists and Tuples__:
+```python
+my_list = [1, 2, 3, 4, 5]
+if 3 in my_list:
+    print("3 is in the list")
+```
+
+__Sets__:
+```python
+my_set = {1, 2, 3}
+if 2 in my_set:
+    print("2 is in the set")
+```
+
+__Dictionaries (Checking for Keys)__:
+```python
+my_dict = {'a': 1, 'b': 2, 'c': 3}
+if 'b' in my_dict:
+    print("Key 'b' exists in the dictionary")
+```
+
+In each of these cases, the in operator is used to check if a specific element (or key in the case of dictionaries) exists within the iterable. If the element is found, the condition evaluates to True, allowing you to perform actions based on that information.
+
+---
+
+### 13. Understanding Sets
+
+A set in Python is an unordered collection of unique elements. It is defined by curly braces `{}` and can contain various data types such as integers, floats, strings, and even other sets or tuples. The key characteristics of a set are:
+
+* Uniqueness: A set cannot contain duplicate elements. If you try to add an element that is already present in the set, it won't be added again.
+* Unordered: The elements in a set are not stored in any particular order. When you iterate over a set or print it, the order of elements may vary each time.
+* Mutable: Sets are mutable, which means you can add or remove elements from a set after it has been created.
+
+Sets are useful for various operations such as checking membership (whether an element is in the set), performing set operations like union, intersection, difference, and symmetric difference, and removing duplicates from a collection of elements. Here's an example of creating and working with sets in Python:
+
+```Python
+# Creating a set
+my_set = {1, 2, 3, 4, 5}
+
+# Adding elements to the set
+my_set.add(6)
+my_set.add(2)  # Adding a duplicate element (won't be added again)
+
+# Removing elements from the set
+my_set.remove(3)
+
+# Checking membership
+print(2 in my_set)  # Output: True
+print(7 in my_set)  # Output: False
+```
+
+Set operations example:
+
+```python
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+
+union_set = set1.union(set2)  # Union of two sets
+intersection_set = set1.intersection(set2)  # Intersection of two sets
+difference_set = set1.difference(set2)  # Difference between two sets
+symmetric_difference_set = set1.symmetric_difference(set2)  # Symmetric difference 
+
+print(union_set)  # Output: {1, 2, 3, 4, 5}
+print(intersection_set)  # Output: {3}
+print(difference_set)  # Output: {1, 2}
+print(symmetric_difference_set)  # Output: {1, 2, 4, 5}
+# Ps. Symmetric difference refers to the elements that are present in either of two sets, but not in both.
+```
+
+Sets are versatile data structures that are commonly used in Python for various programming tasks due to their unique properties and efficient set operations.
+
+---
+
+### 14. Exploring Tuples
+
+A tuple in Python is a data structure that allows you to store a collection of elements. It is similar to a list, but unlike lists, tuples are immutable, which means once a tuple is created, its elements cannot be modified, added, or removed. Tuples are defined using parentheses `()` and can contain elements of different data types. Here are some key points about tuples and their common use cases:
+
+* Immutable Sequences: Tuples are used to store an ordered sequence of elements that cannot be changed after creation. This immutability makes tuples suitable for situations where you want to ensure that the data remains constant throughout your program.
+
+* Multiple Values: Tuples can store multiple values of different types, such as integers, floats, strings, and even other tuples. This makes tuples versatile for organizing and representing structured data.
+
+* Returning Multiple Values: Tuples are often used to return multiple values from a function. Instead of returning individual values, you can pack them into a tuple and unpack the tuple when receiving the return values.
+
+* Unpacking and Packing: Tuples support unpacking, which allows you to assign multiple variables at once by unpacking a tuple into individual elements. Packing is the process of creating a tuple by grouping multiple values together.
+
+Here are some examples that demonstrate the power and versatility of tuples.
+
+```python
+# Creating a tuple
+my_tuple = (1, 2, 3, 'hello', 4.5)
+
+# Accessing elements
+print(my_tuple[0])  # Output: 1
+print(my_tuple[3])  # Output: 'hello'
+
+# Unpacking a tuple
+a, b, c, d, e = my_tuple
+print(a, b, c, d, e)  # Output: 1 2 3 'hello' 4.5
+
+# Returning multiple values from a function
+def get_info():
+    name = 'Renato Lins'
+    country = 'Brazil'
+    return name, country
+
+info_tuple = get_info()
+print(info_tuple)  # Output: ('Renato Lins', 'Brazil')
+
+# Using tuples as keys in dictionaries (since they are immutable)
+my_dict = {(1, 2): 'value', (3, 4): 'another value'}
+print(my_dict[(1, 2)])  # Output: 'value'
+```
+
+__Understanding Unpacking and Packing Better__:
+
+1) Unpacking: 
+
+Unpacking refers to the process of extracting individual elements from a tuple and assigning them to multiple variables simultaneously. This is particularly useful when a tuple contains multiple values that you want to use independently. Here's an example:
+
+```python
+my_tuple = (1, 2, 3)
+a, b, c = my_tuple  # Unpacking the tuple into variables a, b, and c
+print(a)  # Output: 1
+print(b)  # Output: 2
+print(c)  # Output: 3
+```
+
+In this example, the values (1, 2, 3) from my_tuple are unpacked into variables a, b, and c, respectively.
+
+2) Packing:
+
+Packing is the reverse process of unpacking. It involves grouping multiple values or variables together to create a tuple. This can be done explicitly by using parentheses `()` or implicitly in certain contexts. Here's an example:
+
+```python
+x = 10
+y = 20
+z = 30
+my_packed_tuple = (x, y, z)  # Packing values into a tuple
+print(my_packed_tuple)  # Output: (10, 20, 30)
+```
+
+In this example, the values `x`, `y`, and `z` are packed into `my_packed_tuple` using parentheses `()`.
+
+3) Combining Unpacking and Packing:
+
+You can also combine unpacking and packing in various ways to manipulate tuples. For instance:
+
+```python
+# Example combining unpacking and packing
+original_tuple = (1, 2, 3, 4, 5)
+a, *b, c = original_tuple  # Unpacking with * operator to capture multiple elements
+print(a)  # Output: 1
+print(b)  # Output: [2, 3, 4]
+print(c)  # Output: 5
+
+# Packing into a new tuple
+new_tuple = (a, *b, c)
+print(new_tuple)  # Output: (1, 2, 3, 4, 5)
+```
+
+In this example, the `*` operator is used during unpacking to capture multiple elements into variable `b`, and then these elements are packed back into `new_tuple`.
+
+Unpacking and packing are fundamental concepts in working with tuples and are often used to handle multiple values efficiently and effectively in Python.
+
+---
+
+### 15. Processing Iterables with .map() and .filter() 
 
 Python provides powerful tools like `map()`, `filter()` (as well as many others) for processing iterables efficiently. These methods align with functional programming principles, promoting clarity, immutability, and composability in code. Benefits are:
 
@@ -690,6 +947,7 @@ print(result)  # Output: [2, 4, 6, 8, 10]
 ```
 
 ---
+
 
 ### BONUS - Installing and running Python on your machine
 
