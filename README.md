@@ -273,9 +273,9 @@ result = "A" if score >= 90 else "B" if score >= 80 else "C" if score >= 70 else
 print(result) # Output: C
 ```
 
-However, it is important to mention that chaining too many operators in one line can reduce readability. In some cases, using regular `if` statements or refactoring the code might lead to clearer and more maintainable code. Additionally, we can consider using a series of ternary expressions to enhance readability.
+However, it is important to mention that chaining too many operators in one line can reduce readability. In some cases, using regular if statements or refactoring the code might lead to clearer and more maintainable code. Additionally, we can consider using parentheses `()` or backslashes `\` to separate each expression onto its own line, enhancing readability.
 
-This can be done line this:
+We can do this:
 
 ```python
 score = 78
@@ -289,7 +289,7 @@ result = (
 print(result) # Output: C
 ```
 
-Or like this:
+Or this:
 
 ```python
 score = 78
