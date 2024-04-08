@@ -579,7 +579,127 @@ my_variable = 42
 
 ---
 
-### 10. String Manipulation - Essential Techniques and Functions
+### 10. Scope
+
+In Python, scope refers to the visibility and accessibility of variables, functions, and objects within your code. Understanding scope is crucial because it determines where variables and functions are accessible and where they are not. There are primarily three types of scope in Python: local scope, enclosing (non-local) scope, and global scope.
+
+__Local Scope__: Variables that are defined inside a function have local scope, which means they are accessible only within that function. Once the function execution ends, the variables are no longer accessible. Example:
+
+```python
+def my_function():
+    local_var = 10  # local variable
+    print(local_var)  # 10
+
+my_function()
+print(local_var)  # NameError: name 'local_var' is not defined
+```
+
+__Enclosing (Non-Local) Scope__: Enclosing scope refers to the scope of variables defined in an enclosing function (if any). If a variable is not found in the local scope, Python looks for it in the enclosing scope. Example:
+
+```python
+def outer_function():
+    outer_var = 20  # outer variable
+
+    def inner_function():
+        print(outer_var)  # accessing outer_var from enclosing scope
+
+    inner_function()
+
+outer_function()
+print(outer_var)  # NameError: name 'outer_var' is not defined
+```
+
+__Global Scope__: Variables that are defined outside of any function or block have global scope, which means they are accessible throughout your entire code. Example:
+
+```python
+global_var = 30  # global variable
+
+def another_function():
+    print(global_var)  # 30
+
+another_function()
+print(global_var)  # 30
+```
+
+__Module Scope__: Module scope in Python refers to the accessibility and reach of elements defined at the top level of a Python module. When you create a Python file and save it with a .py extension, it becomes a module. Elements like variables, functions, or classes that are defined outside of specific structures within this module gain module scope. If you import a module into another Python script or module and there is a variable defined at the module level (module scope variable) in the imported module, you can access and modify it.
+
+Consider a module named my_module.py:
+
+```python
+# my_module.py
+
+module_var = 50  # This is a variable with module scope
+```
+
+Now, in another Python script or module, say main.py, you import my_module and access its module-level variable module_var:
+
+```python
+# main.py
+import my_module
+
+print(my_module.module_var)  # Accessing module-level variable from my_module
+
+my_module.module_var = 100  # Modifying module-level variable in my_module
+print(my_module.module_var)  # Updated value after modification
+```
+
+__nonlocal Keyword__: In Python, the `nonlocal` keyword allows you to modify variables in the enclosing (non-local) scope from within a nested function. Example:
+
+```python
+def outer_function():
+    outer_var = 20  # outer variable
+
+    def inner_function():
+        nonlocal outer_var
+        outer_var += 5  # modifying outer_var from inner function
+        print(outer_var)  # 25
+
+    inner_function()
+
+outer_function()
+```
+
+__global Keyword__: The `global` keyword is used to declare that a variable inside a function is referring to a global variable defined outside the function's scope. This keyword allows you to modify global variables from within a function, which would otherwise create a new local variable with the same name if not explicitly declared as global. Here's an example to illustrate the use of the global keyword:
+
+```python
+global_var = 30  # global variable
+
+def modify_global():
+    global global_var
+    global_var += 5  # modifying the global variable
+    print(global_var)  # 35
+
+modify_global()
+print(global_var)  # 35
+```
+
+__Best practices related to scope:__
+
+* Avoid Using Global Variables: Limiting the use of global variables in Python is recommended to avoid namespace pollution and improve code maintainability. Prefer defining variables within functions whenever possible to keep their scope limited and prevent unintended side effects.
+
+* Avoid using both the `nonlocal` and `global` keywords: While these keywords serve specific purposes, relying heavily on them can make your code harder to understand and maintain. Instead, consider alternative approaches such as passing variables as arguments or returning modified values from functions. This practice not only promotes code clarity but also helps in organizing and structuring your code in a more manageable way.
+
+* Avoid Shadowing Variables: Variable shadowing occurs when a variable declared within a local scope has the same name as a variable in an outer scope, effectively hiding the outer variable within that scope. Be mindful of variable names to avoid unintentionally shadowing variables from outer scopes, which can lead to confusion and bugs. 
+
+* Use `if __name__ == "__main__:"` in your main Python file (application entry point): Using `if __name__ == "__main__:"` in your main file (e.g., main.py) is a recommended practice for scoping and organizing code. It ensures that certain parts of your script execute only when run directly, enhancing code clarity and structure. Here's an illustration using a simple Python script named main.py:
+
+```python
+# main.py
+
+def greet(name):
+    print(f"Hello, {name}!")
+
+# This block will only execute if the script is run directly
+if __name__ == "__main__":
+    user_name = input("Enter your name: ")
+    greet(user_name)
+```
+
+In this script: The greet function is defined to print a greeting message with the given name. The if `__name__ == "__main__":` block contains code that asks the user for their name and then calls the greet function with that name, printing a personalized greeting. When you run main.py directly, it prompts you to enter your name and then greets you with the message `"Hello, [your name]!"`. However, if you import main.py into another script or module, the code inside the if `__name__ == "__main__":` block will not run automatically. Instead, you can use the `greet` function as part of the imported module in the other script.
+
+---
+
+### 11. String Manipulation - Essential Techniques and Functions
 
 __Concatenation:__ Concatenation involves merging strings together. Example:
 
@@ -666,7 +786,7 @@ Ps. For a deeper understanding in string manipulation, consider exploring the Py
 
 ---
 
-### 11. String Formatting
+### 12. String Formatting
 
 Here are four common ways of formatting strings in Python:
 
@@ -729,7 +849,7 @@ When considering string formatting methods in Python, each has its advantages in
 
 ---
 
-### 12. Understanding 'in' Better
+### 13. Understanding 'in' Better
 
 In Python, the `in` keyword is used as an operator to test if a value is present in a sequence (such as a list, tuple, string, or set). It is not a reserved word like `if` or `for`, but rather an operator that checks for membership in a collection. The in operator works with a wide range of iterable types, making it a versatile tool for checking if an element exists within a any iterable. To exemplify:
 
@@ -765,7 +885,7 @@ In each of these cases, the in operator is used to check if a specific element (
 
 ---
 
-### 13. Understanding Sets
+### 14. Understanding Sets
 
 A set in Python is an unordered collection of unique elements. It is defined by curly braces `{}` and can contain various data types such as integers, floats, strings, and even other sets or tuples. The key characteristics of a set are:
 
@@ -813,7 +933,7 @@ Sets are versatile data structures that are commonly used in Python for various 
 
 ---
 
-### 14. Exploring Tuples
+### 15. Exploring Tuples
 
 A tuple in Python is a data structure that allows you to store a collection of elements. It is similar to a list, but unlike lists, tuples are immutable, which means once a tuple is created, its elements cannot be modified, added, or removed. Tuples are defined using parentheses `()` and can contain elements of different data types. Here are some key points about tuples and their common use cases:
 
@@ -906,7 +1026,7 @@ Unpacking and packing are fundamental concepts in working with tuples and are of
 
 ---
 
-### 15. Processing Iterables with .map() and .filter() 
+### 16. Processing Iterables with .map() and .filter() 
 
 Python provides powerful tools like `map()`, `filter()` (as well as many others) for processing iterables efficiently. These methods align with functional programming principles, promoting clarity, immutability, and composability in code. Benefits are:
 
