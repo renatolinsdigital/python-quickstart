@@ -16,17 +16,18 @@ Python was initially created by Guido van Rossum in 1991 with the intention of c
 - [10. Basics of functions](#10-basics-of-functions)
 - [11. String Manipulation & Formatting](#11-string-manipulation--formatting)
 - [12. Scope I: Types of Scope](#12-scope-i-types-of-scope)
-- [13. Scope II: Keywords and best practices](#13-scope-ii-keywords-and-best-practices)
-- [14. Processing Iterables with .map() and .filter() ](#14-processing-iterables-with-map-and-filter-)
-- [15. Built-In Python mathematical features](#15-built-in-python-mathematical-features)
-- [16. Understanding 'in' Better](#16-understanding-in-better)
-- [17. Understanding Sets](#17-understanding-sets)
-- [18. Exploring Tuples](#18-exploring-tuples)
-- [19. Objects and Common Object Methods in Python](#19-objects-and-common-object-methods-in-python)
-- [20. A better understanding of `None` and missing values](#20-a-better-understanding-of-none-and-missing-values)
-- [21. Error Handling in Python](#21-error-handling-in-python)
-- [22. Asynchronous Programming in Python](#22-asynchronous-programming-in-python)
-- [23. Imperative vs. Declarative Paradigms and Immutability in Python](#23-imperative-vs-declarative-paradigms-and-immutability-in-python)
+- [13. Processing Iterables with .map() and .filter() ](#13-processing-iterables-with-map-and-filter-)
+- [14. Built-In Python mathematical features](#14-built-in-python-mathematical-features)
+- [15. Understanding 'in' Better](#15-understanding-in-better)
+- [16. Understanding Sets](#16-understanding-sets)
+- [17. Exploring Tuples](#17-exploring-tuples)
+- [18. Objects and Common Object Methods in Python](#18-objects-and-common-object-methods-in-python)
+- [19. A better understanding of `None` and missing values](#19-a-better-understanding-of-none-and-missing-values)
+- [20. Error Handling in Python](#20-error-handling-in-python)
+- [21. Asynchronous Programming in Python](#21-asynchronous-programming-in-python)
+- [22. Imperative vs. Declarative Paradigms and Immutability in Python](#22-imperative-vs-declarative-paradigms-and-immutability-in-python)
+- [23. Scope II: Closures](#23-scope-ii-closures)
+- [24. Scope III: Scope-related Keywords and Best Practices](#24-scope-iii-scope-related-keywords-and-best-practices)
 - [Proposed exercises and answers](#proposed-exercises-and-answers)
 - [BONUS - Installing and running Python on your machine](#bonus---installing-and-running-python-on-your-machine)
 
@@ -823,65 +824,7 @@ print(my_module.module_var)  # Updated value after modification
 
 ---
 
-### 13. Scope II: Keywords and best practices
-
-__nonlocal Keyword__: In Python, the `nonlocal` keyword allows you to modify variables in the enclosing (non-local) scope from within a nested function. Example:
-
-```python
-def outer_function():
-    outer_var = 20  # outer variable
-
-    def inner_function():
-        nonlocal outer_var
-        outer_var += 5  # modifying outer_var from inner function
-        print(outer_var)  # 25
-
-    inner_function()
-
-outer_function()
-```
-
-__global Keyword__: The `global` keyword is used to declare that a variable inside a function is referring to a global variable defined outside the function's scope. This keyword allows you to modify global variables from within a function, which would otherwise create a new local variable with the same name if not explicitly declared as global. Here's an example to illustrate the use of the global keyword:
-
-```python
-global_var = 30  # global variable
-
-def modify_global():
-    global global_var
-    global_var += 5  # modifying the global variable
-    print(global_var)  # 35
-
-modify_global()
-print(global_var)  # 35
-```
-
-__Best practices related to scope:__
-
-* Avoid Using Global Variables: Limiting the use of global variables in Python is recommended to avoid namespace pollution and improve code maintainability. Prefer defining variables within functions whenever possible to keep their scope limited and prevent unintended side effects.
-
-* Avoid using both the `nonlocal` and `global` keywords: While these keywords serve specific purposes, relying heavily on them can make your code harder to understand and maintain. Instead, consider alternative approaches such as passing variables as arguments or returning modified values from functions. This practice not only promotes code clarity but also helps in organizing and structuring your code in a more manageable way.
-
-* Avoid Shadowing Variables: Variable shadowing occurs when a variable declared within a local scope has the same name as a variable in an outer scope, effectively hiding the outer variable within that scope. Be mindful of variable names to avoid unintentionally shadowing variables from outer scopes, which can lead to confusion and bugs. 
-
-* Use `if __name__ == "__main__:"` in your main Python file (application entry point): Using `if __name__ == "__main__:"` in your main file (e.g., main.py) is a recommended practice for scoping and organizing code. It ensures that certain parts of your script execute only when run directly, enhancing code clarity and structure. Here's an illustration using a simple Python script named main.py:
-
-```python
-# main.py
-
-def greet(name):
-    print(f"Hello, {name}!")
-
-# This block will only execute if the script is run directly
-if __name__ == "__main__":
-    user_name = input("Enter your name: ")
-    greet(user_name)
-```
-
-In this script: The greet function is defined to print a greeting message with the given name. The if `__name__ == "__main__":` block contains code that asks the user for their name and then calls the greet function with that name, printing a personalized greeting. When you run main.py directly, it prompts you to enter your name and then greets you with the message `"Hello, [your name]!"`. However, if you import main.py into another script or module, the code inside the if `__name__ == "__main__":` block will not run automatically. Instead, you can use the `greet` function as part of the imported module in the other script.
-
----
-
-### 14. Processing Iterables with .map() and .filter() 
+### 13. Processing Iterables with .map() and .filter() 
 
 Python provides powerful tools like `map()`, `filter()` (as well as many others) for processing iterables efficiently. These methods align with functional programming principles, promoting clarity, immutability, and composability in code. Benefits are:
 
@@ -970,7 +913,7 @@ print(result)  # Output: [2, 4, 6, 8, 10]
 
 ---
 
-### 15. Built-In Python mathematical features
+### 14. Built-In Python mathematical features
 
 Python provides built-in mathematical constants and functions through the `math` module, which allows developers to perform a wide range of mathematical operations. This includes functions for trigonometry, logarithms, rounding, and more. Python makes it easy to handle complex mathematical computations efficiently.
 
@@ -1031,7 +974,7 @@ In Python, these constants and functions are part of the `math` module, which pr
 
 ---
 
-### 16. Understanding 'in' Better
+### 15. Understanding 'in' Better
 
 In Python, the `in` keyword is used as an operator to test if a value is present in a sequence (such as a list, tuple, string, or set). It is not a reserved word like `if` or `for`, but rather an operator that checks for membership in a collection. The in operator works with a wide range of iterable types, making it a versatile tool for checking if an element exists within a any iterable. To exemplify:
 
@@ -1067,7 +1010,7 @@ In each of these cases, the in operator is used to check if a specific element (
 
 ---
 
-### 17. Understanding Sets
+### 16. Understanding Sets
 
 A set in Python is an unordered collection of unique elements. It is defined by curly braces `{}` and can contain various data types such as integers, floats, strings, and even other sets or tuples. The key characteristics of a set are:
 
@@ -1115,7 +1058,7 @@ Sets are versatile data structures that are commonly used in Python for various 
 
 ---
 
-### 18. Exploring Tuples
+### 17. Exploring Tuples
 
 A tuple in Python is a data structure that allows you to store a collection of elements. It is similar to a list, but unlike lists, tuples are immutable, which means once a tuple is created, its elements cannot be modified, added, or removed. Tuples are defined using parentheses `()` and can contain elements of different data types. Here are some key points about tuples and their common use cases:
 
@@ -1208,7 +1151,7 @@ Unpacking and packing are fundamental concepts in working with tuples and are of
 
 ---
 
-### 19. Objects and Common Object Methods in Python
+### 18. Objects and Common Object Methods in Python
 
 In Python, objects are collections of key-value pairs. Each key must be an immutable type (e.g., strings, numbers, tuples), and values can be any data type, including integers, strings, booleans, other objects, or functions. Python objects can be created using dictionaries (`dict`) or classes. 
 
@@ -1378,7 +1321,7 @@ print(person['name'])  # Output: John
 
 ---
 
-### 20. A better understanding of `None` and missing values
+### 19. A better understanding of `None` and missing values
 
 In Python, `None` is used to represent the absence of a value. It is the default value for variables and object attributes when they are not explicitly initialized with a value. Assigning `None` to a variable signifies that it holds no value intentionally.
 
@@ -1469,7 +1412,7 @@ However, it’s best to avoid using `not` for checking `None` and use explicit c
 
 ---
 
-### 21. Error Handling in Python
+### 20. Error Handling in Python
 
 Error handling is a crucial aspect of writing robust Python code. It involves anticipating and managing errors that can occur during the execution of a program. By properly handling errors, we can prevent your application from crashing and provide users with informative feedback.
 
@@ -1546,11 +1489,7 @@ By implementing proper error handling techniques, we enhance the quality, reliab
 
 ---
 
-Sure! Here’s a comprehensive tutorial on asynchronous programming in Python, focusing on using the `aiohttp` library for making asynchronous API calls. This version will also address how to properly manage the session to avoid unclosed connector errors.
-
----
-
-### 22. Asynchronous Programming in Python
+### 21. Asynchronous Programming in Python
 
 Asynchronous programming allows your code to execute multiple tasks concurrently without blocking the main thread. This is particularly useful when dealing with I/O-bound tasks, such as making API calls or reading files, where the program would typically wait for the operation to complete before proceeding. By using asynchronous code, you can improve the efficiency and responsiveness of your applications.
 
@@ -1657,11 +1596,7 @@ asyncio.run(main())
 
 ---
 
-Here's the revised version of your tutorial on **Imperative vs. Declarative Paradigms and Immutability in Python** with an emphasis on best practices:
-
----
-
-### 23. Imperative vs. Declarative Paradigms and Immutability in Python
+### 22. Imperative vs. Declarative Paradigms and Immutability in Python
 
 #### Imperative Programming
 
@@ -1735,6 +1670,185 @@ Here, `original_tuple` remains unchanged, while `new_tuple` is a new tuple that 
   - **Create New Instances:** Instead of modifying existing data structures, create new ones to reflect changes, promoting a clearer understanding of data flow and transformations.
 
 By adhering to these best practices, developers can create more maintainable and readable code in professional applications, leading to better collaboration and efficiency in software development.
+
+---
+
+### 23. Scope II: Closures
+
+A **closure** is a powerful concept in Python where a function captures and remembers the state of variables from its outer scope, even after the outer function has completed execution. This feature allows the inner function to access and manipulate those variables later.
+
+#### Example 1: Basic Closure
+
+Here’s a simple example illustrating how closures work:
+
+```python
+def outer_function():
+    counter = 0  # Local variable in the outer scope
+
+    def inner_function():
+        nonlocal counter  # Allows access to the outer variable 'counter'
+        counter += 1
+        print(counter)
+
+    return inner_function  # Return the inner function
+
+increment = outer_function()  # Create a closure
+increment()  # Outputs: 1
+increment()  # Outputs: 2
+```
+
+**Explanation:**
+
+In this example:
+
+- **`outer_function`** defines a local variable `counter`.
+- **`inner_function`** increments the value of `counter`. Thanks to the closure, `inner_function` retains access to `counter` even after `outer_function` has finished executing.
+
+This allows the inner function to maintain state across multiple calls without using global variables, providing a cleaner and more controlled way to manage state.
+
+#### Example 2: Closure for Custom Incrementer
+
+Here’s another example demonstrating a closure that creates a custom incrementer:
+
+```python
+def make_incrementer(increment_by):
+    def incrementer(value):
+        return value + increment_by
+    return incrementer
+
+increment_by_5 = make_incrementer(5)
+increment_by_10 = make_incrementer(10)
+
+print(increment_by_5(10))  # Outputs: 15
+print(increment_by_10(10)) # Outputs: 20
+```
+
+**Explanation:**
+
+In this example:
+
+- **`make_incrementer`** takes a parameter `increment_by` and defines an inner function `incrementer`.
+- The inner function takes a `value` and adds `increment_by` to it, returning the result.
+- By creating two incrementers (`increment_by_5` and `increment_by_10`), we can maintain different states for the increments.
+
+This demonstrates how closures can be used to create functions with customized behavior based on external parameters.
+
+#### When to Use Closures
+
+Closures are particularly useful in the following scenarios:
+
+- **Maintaining State:** When you want to preserve the state between function calls without relying on global variables.
+
+- **Creating Private Variables:** When you need to create variables that should not be accessible from outside the function. This encapsulation can help prevent unintended interference from other parts of the code.
+
+---
+
+### 24. Scope III: Scope-related Keywords and Best Practices
+
+#### Global Keyword
+
+The `global` keyword in Python allows you to modify a global variable defined outside the function's scope. Without this keyword, a variable inside a function with the same name as a global variable will create a new local variable. Here’s an example:
+
+```python
+global_var = 30  # Global variable
+
+def modify_global():
+    global global_var
+    global_var += 5  # Modifying the global variable
+    print(global_var)  # Output: 35
+
+modify_global()
+print(global_var)  # Output: 35
+```
+
+#### Nonlocal Keyword
+
+The `nonlocal` keyword enables you to modify a variable in an enclosing (but non-global) scope. This is particularly useful in closures where you want the inner function to change the value of a variable defined in an outer function:
+
+```python
+def outer():
+    count = 0  # Variable defined in the outer function
+
+    def increment():
+        nonlocal count  # Indicates 'count' is not local to 'increment'
+        count += 1  # Modify the 'count' variable from the outer function
+        return count
+
+    return increment  # Return the inner function
+
+counter = outer()  # Create the closure
+print(counter())   # Output: 1 (first call)
+print(counter())   # Output: 2 (second call)
+```
+
+**Key Points:**
+- `count` is defined in `outer()`, and `increment()` can modify it due to `nonlocal`.
+- Without `nonlocal`, attempting to assign a value to `count` would create a new local variable.
+
+**Use `nonlocal` when:**
+- You have nested functions and want to modify a variable from an outer scope.
+- You're dealing with closures where maintaining state is important.
+
+#### Best Practices for Managing Scope
+
+- **Avoid Global Variables**: Limit the use of global variables to reduce namespace pollution and improve code maintainability. Define variables within functions whenever possible.
+
+- **Minimize Use of `nonlocal` and `global`**: Heavy reliance on these keywords can make your code harder to understand. Consider passing variables as arguments or returning modified values instead.
+
+- **Avoid Shadowing Variables**: Be cautious with variable names to prevent a local variable from hiding an outer variable. This helps avoid confusion and bugs.
+
+- **Use `if __name__ == "__main__":`**: This practice helps organize code by ensuring that certain parts of your script execute only when run directly. Here’s an example:
+
+```python
+# main.py
+
+def greet(name):
+    print(f"Hello, {name}!")
+
+# This block will only execute if the script is run directly
+if __name__ == "__main__":
+    user_name = input("Enter your name: ")
+    greet(user_name)
+```
+
+When running `main.py`, the script prompts for a name and greets the user. If imported into another module, the code in the `if __name__ == "__main__":` block won’t execute automatically, allowing the `greet` function to be used independently.
+
+#### Additional Recommendations
+
+**a. Keep Functions Pure**: Strive to write pure functions that do not modify external state, making them easier to test and understand.
+
+```python
+def add(x, y):
+    return x + y
+
+print(add(5, 10))  # Output: 15
+```
+
+**b. Be Cautious with Mutable Default Arguments**: Using mutable default arguments can lead to unexpected behavior. Instead, use `None` as the default and initialize the mutable object inside the function:
+
+**Common Pitfall**:
+
+```python
+def append_to_list(item, lst=[]):
+    lst.append(item)
+    return lst
+
+print(append_to_list(1))  # Output: [1]
+print(append_to_list(2))  # Output: [1, 2] (unexpected behavior)
+```
+
+**Correct Usage**:
+
+```python
+def append_to_list(item, lst=None):
+    if lst is None:
+        lst = []
+    lst.append(item)
+    return lst
+
+print(append_to_list(1))  # Output: [1]
+print(append_to_list(2))  # Output: [2]
+```
 
 ---
 
