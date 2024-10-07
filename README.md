@@ -2,6 +2,19 @@
 
 Python was initially created by Guido van Rossum in 1991 with the intention of creating a language that emphasizes code readability and simplicity. Over the years, Python has grown to become one of the most popular and versatile programming languages, utilized in web development, data analysis, artificial intelligence, scientific computing, and more.
 
+## Table of Contents
+
+- [1. Considerations: Why to learn Python](#1-considerations-why-to-learn-python)
+- [2. Variables](#2-variables)
+- [3. Data types](#3-data-types)
+- [4. Type conversions](#4-type-conversions)
+- [5. Operators](#5-operators)
+- [6. Control Flow in Python - 'if' Statement](#6-control-flow-in-python---if-statement)
+- [7. Control Flow II - Falsy and Truthy Values](#7-control-flow-ii---falsy-and-truthy-values)
+- [8. Control flow III - Loops](#8-control-flow-iii---loops)
+- [9. Control flow IV - match-case statements](#9-control-flow-iv---match-case-statements)
+- [10. Basics of functions](#10-basics-of-functions)
+
 ---
 
 ### 1. Considerations: Why to learn Python
@@ -47,7 +60,7 @@ NOTE: In Python, when naming variables, it's recommended to adhere to a specific
 
 ---
 
-### 3. Essential data types in Python
+### 3. Data types
 
 Variables in Python are containers that store data values. They allow you to assign names to values, making it easier to reference and manipulate data in your code. Python supports several types of variables, each serving a different purpose. So we have commonly used data types such as:
 
@@ -354,7 +367,7 @@ print(message)  # Output: "Hello, World!"
 
 ---
 
-### 7. Control flow III - Loops
+### 8. Control flow III - Loops
 
 Loops provide a convenient means to execute a block of code repeatedly for each item in the sequence. Let's check a couple of common ways of establishing loop iterations in Python.
 
@@ -443,7 +456,7 @@ __IMPORTANT CONSIDERATION:__ Loops are one of the most frequently used features 
 
 ---
 
-### 8. Control flow IV - match-case statements
+### 9. Control flow IV - match-case statements
 
 The `match-case` statement in Python makes value evaluation straightforward. Unlike some languages, Python avoids the `switch-case` structure in favor of clear and readable `if-elif-else` statements. Yet, managing many conditions with `if-elif-else` can get hard to maintain. That's where Python's answer comes in: the `match-case` statement introduced in __Python 3.10__. Let's see how it workd by the following example:
 
@@ -516,7 +529,7 @@ __Performance considerations:__ In overall performance, the `match-case` stateme
 
 ---
 
-### 9. Basics of functions
+### 10. Basics of functions
 
 In Python, functions are blocks of reusable code that can be defined and called upon to perform specific tasks. They play a crucial role in organizing and structuring code, promoting reusability, and enhancing maintainability. There are two common ways to define functions in Python: function definitions and lambda functions.
 
@@ -579,127 +592,9 @@ my_variable = 42
 
 ---
 
-### 10. Scope
+### 11. String Manipulation & Formatting
 
-In Python, scope refers to the visibility and accessibility of variables, functions, and objects within your code. Understanding scope is crucial because it determines where variables and functions are accessible and where they are not. There are primarily three types of scope in Python: local scope, enclosing (non-local) scope, and global scope.
-
-__Local Scope__: Variables that are defined inside a function have local scope, which means they are accessible only within that function. Once the function execution ends, the variables are no longer accessible. Example:
-
-```python
-def my_function():
-    local_var = 10  # local variable
-    print(local_var)  # 10
-
-my_function()
-print(local_var)  # NameError: name 'local_var' is not defined
-```
-
-__Enclosing (Non-Local) Scope__: Enclosing scope refers to the scope of variables defined in an enclosing function (if any). If a variable is not found in the local scope, Python looks for it in the enclosing scope. Example:
-
-```python
-def outer_function():
-    outer_var = 20  # outer variable
-
-    def inner_function():
-        print(outer_var)  # accessing outer_var from enclosing scope
-
-    inner_function()
-
-outer_function()
-print(outer_var)  # NameError: name 'outer_var' is not defined
-```
-
-__Global Scope__: Variables that are defined outside of any function or block have global scope, which means they are accessible throughout your entire code. Example:
-
-```python
-global_var = 30  # global variable
-
-def another_function():
-    print(global_var)  # 30
-
-another_function()
-print(global_var)  # 30
-```
-
-__Module Scope__: Module scope in Python refers to the accessibility and reach of elements defined at the top level of a Python module. When you create a Python file and save it with a .py extension, it becomes a module. Elements like variables, functions, or classes that are defined outside of specific structures within this module gain module scope. If you import a module into another Python script or module and there is a variable defined at the module level (module scope variable) in the imported module, you can access and modify it.
-
-Consider a module named my_module.py:
-
-```python
-# my_module.py
-
-module_var = 50  # This is a variable with module scope
-```
-
-Now, in another Python script or module, say main.py, you import my_module and access its module-level variable module_var:
-
-```python
-# main.py
-import my_module
-
-print(my_module.module_var)  # Accessing module-level variable from my_module
-
-my_module.module_var = 100  # Modifying module-level variable in my_module
-print(my_module.module_var)  # Updated value after modification
-```
-
-__nonlocal Keyword__: In Python, the `nonlocal` keyword allows you to modify variables in the enclosing (non-local) scope from within a nested function. Example:
-
-```python
-def outer_function():
-    outer_var = 20  # outer variable
-
-    def inner_function():
-        nonlocal outer_var
-        outer_var += 5  # modifying outer_var from inner function
-        print(outer_var)  # 25
-
-    inner_function()
-
-outer_function()
-```
-
-__global Keyword__: The `global` keyword is used to declare that a variable inside a function is referring to a global variable defined outside the function's scope. This keyword allows you to modify global variables from within a function, which would otherwise create a new local variable with the same name if not explicitly declared as global. Here's an example to illustrate the use of the global keyword:
-
-```python
-global_var = 30  # global variable
-
-def modify_global():
-    global global_var
-    global_var += 5  # modifying the global variable
-    print(global_var)  # 35
-
-modify_global()
-print(global_var)  # 35
-```
-
-__Best practices related to scope:__
-
-* Avoid Using Global Variables: Limiting the use of global variables in Python is recommended to avoid namespace pollution and improve code maintainability. Prefer defining variables within functions whenever possible to keep their scope limited and prevent unintended side effects.
-
-* Avoid using both the `nonlocal` and `global` keywords: While these keywords serve specific purposes, relying heavily on them can make your code harder to understand and maintain. Instead, consider alternative approaches such as passing variables as arguments or returning modified values from functions. This practice not only promotes code clarity but also helps in organizing and structuring your code in a more manageable way.
-
-* Avoid Shadowing Variables: Variable shadowing occurs when a variable declared within a local scope has the same name as a variable in an outer scope, effectively hiding the outer variable within that scope. Be mindful of variable names to avoid unintentionally shadowing variables from outer scopes, which can lead to confusion and bugs. 
-
-* Use `if __name__ == "__main__:"` in your main Python file (application entry point): Using `if __name__ == "__main__:"` in your main file (e.g., main.py) is a recommended practice for scoping and organizing code. It ensures that certain parts of your script execute only when run directly, enhancing code clarity and structure. Here's an illustration using a simple Python script named main.py:
-
-```python
-# main.py
-
-def greet(name):
-    print(f"Hello, {name}!")
-
-# This block will only execute if the script is run directly
-if __name__ == "__main__":
-    user_name = input("Enter your name: ")
-    greet(user_name)
-```
-
-In this script: The greet function is defined to print a greeting message with the given name. The if `__name__ == "__main__":` block contains code that asks the user for their name and then calls the greet function with that name, printing a personalized greeting. When you run main.py directly, it prompts you to enter your name and then greets you with the message `"Hello, [your name]!"`. However, if you import main.py into another script or module, the code inside the if `__name__ == "__main__":` block will not run automatically. Instead, you can use the `greet` function as part of the imported module in the other script.
-
----
-
-### 11. String Manipulation - Essential Techniques and Functions
+1) String Manipulation: Essential Techniques and Functions
 
 __Concatenation:__ Concatenation involves merging strings together. Example:
 
@@ -784,9 +679,7 @@ In Python, a plethora of string methods, including `.find()`, `.split()`, `.star
 
 Ps. For a deeper understanding in string manipulation, consider exploring the Python Language Reference, which provides detailed insights into the language's specifications.
 
----
-
-### 12. String Formatting
+2) Strings Formatting:
 
 Here are four common ways of formatting strings in Python:
 
@@ -849,7 +742,281 @@ When considering string formatting methods in Python, each has its advantages in
 
 ---
 
-### 13. Understanding 'in' Better
+### 12. Scope I: Types of Scope
+
+In Python, scope refers to the visibility and accessibility of variables, functions, and objects within your code. Understanding scope is crucial because it determines where variables and functions are accessible and where they are not. There are primarily three types of scope in Python: local scope, enclosing (non-local) scope, and global scope.
+
+__Local Scope__: Variables that are defined inside a function have local scope, which means they are accessible only within that function. Once the function execution ends, the variables are no longer accessible. Example:
+
+```python
+def my_function():
+    local_var = 10  # local variable
+    print(local_var)  # 10
+
+my_function()
+print(local_var)  # NameError: name 'local_var' is not defined
+```
+
+__Enclosing (Non-Local) Scope__: Enclosing scope refers to the scope of variables defined in an enclosing function (if any). If a variable is not found in the local scope, Python looks for it in the enclosing scope. Example:
+
+```python
+def outer_function():
+    outer_var = 20  # outer variable
+
+    def inner_function():
+        print(outer_var)  # accessing outer_var from enclosing scope
+
+    inner_function()
+
+outer_function()
+print(outer_var)  # NameError: name 'outer_var' is not defined
+```
+
+__Global Scope__: Variables that are defined outside of any function or block have global scope, which means they are accessible throughout your entire code. Example:
+
+```python
+global_var = 30  # global variable
+
+def another_function():
+    print(global_var)  # 30
+
+another_function()
+print(global_var)  # 30
+```
+
+__Module Scope__: Module scope in Python refers to the accessibility and reach of elements defined at the top level of a Python module. When you create a Python file and save it with a .py extension, it becomes a module. Elements like variables, functions, or classes that are defined outside of specific structures within this module gain module scope. If you import a module into another Python script or module and there is a variable defined at the module level (module scope variable) in the imported module, you can access and modify it.
+
+Consider a module named my_module.py:
+
+```python
+# my_module.py
+
+module_var = 50  # This is a variable with module scope
+```
+
+Now, in another Python script or module, say main.py, you import my_module and access its module-level variable module_var:
+
+```python
+# main.py
+import my_module
+
+print(my_module.module_var)  # Accessing module-level variable from my_module
+
+my_module.module_var = 100  # Modifying module-level variable in my_module
+print(my_module.module_var)  # Updated value after modification
+```
+
+---
+
+### 13. Scope II: Keywords and best practices
+
+__nonlocal Keyword__: In Python, the `nonlocal` keyword allows you to modify variables in the enclosing (non-local) scope from within a nested function. Example:
+
+```python
+def outer_function():
+    outer_var = 20  # outer variable
+
+    def inner_function():
+        nonlocal outer_var
+        outer_var += 5  # modifying outer_var from inner function
+        print(outer_var)  # 25
+
+    inner_function()
+
+outer_function()
+```
+
+__global Keyword__: The `global` keyword is used to declare that a variable inside a function is referring to a global variable defined outside the function's scope. This keyword allows you to modify global variables from within a function, which would otherwise create a new local variable with the same name if not explicitly declared as global. Here's an example to illustrate the use of the global keyword:
+
+```python
+global_var = 30  # global variable
+
+def modify_global():
+    global global_var
+    global_var += 5  # modifying the global variable
+    print(global_var)  # 35
+
+modify_global()
+print(global_var)  # 35
+```
+
+__Best practices related to scope:__
+
+* Avoid Using Global Variables: Limiting the use of global variables in Python is recommended to avoid namespace pollution and improve code maintainability. Prefer defining variables within functions whenever possible to keep their scope limited and prevent unintended side effects.
+
+* Avoid using both the `nonlocal` and `global` keywords: While these keywords serve specific purposes, relying heavily on them can make your code harder to understand and maintain. Instead, consider alternative approaches such as passing variables as arguments or returning modified values from functions. This practice not only promotes code clarity but also helps in organizing and structuring your code in a more manageable way.
+
+* Avoid Shadowing Variables: Variable shadowing occurs when a variable declared within a local scope has the same name as a variable in an outer scope, effectively hiding the outer variable within that scope. Be mindful of variable names to avoid unintentionally shadowing variables from outer scopes, which can lead to confusion and bugs. 
+
+* Use `if __name__ == "__main__:"` in your main Python file (application entry point): Using `if __name__ == "__main__:"` in your main file (e.g., main.py) is a recommended practice for scoping and organizing code. It ensures that certain parts of your script execute only when run directly, enhancing code clarity and structure. Here's an illustration using a simple Python script named main.py:
+
+```python
+# main.py
+
+def greet(name):
+    print(f"Hello, {name}!")
+
+# This block will only execute if the script is run directly
+if __name__ == "__main__":
+    user_name = input("Enter your name: ")
+    greet(user_name)
+```
+
+In this script: The greet function is defined to print a greeting message with the given name. The if `__name__ == "__main__":` block contains code that asks the user for their name and then calls the greet function with that name, printing a personalized greeting. When you run main.py directly, it prompts you to enter your name and then greets you with the message `"Hello, [your name]!"`. However, if you import main.py into another script or module, the code inside the if `__name__ == "__main__":` block will not run automatically. Instead, you can use the `greet` function as part of the imported module in the other script.
+
+---
+
+### 14. Processing Iterables with .map() and .filter() 
+
+Python provides powerful tools like `map()`, `filter()` (as well as many others) for processing iterables efficiently. These methods align with functional programming principles, promoting clarity, immutability, and composability in code. Benefits are:
+
+* Clarity: Expressive operations like mapping and filtering make code easier to understand.
+* Immutability: Working with immutable data structures reduces bugs and simplifies debugging.
+* Composability: Functions can be combined into pipelines for complex transformations.
+* Testability: Stateless functions facilitate unit testing, ensuring code reliability.
+* Parallelism: Functional programming supports parallel and concurrent execution, enhancing performance.
+
+By embracing these methods and principles, developers can craft cleaner, more efficient codebases that are easier to maintain and scale. 
+
+__Iterables vs. Iterators__: Before exploring `.map()` and `.filter()`, it's crucial to understand the concepts of iterators, as well as the distinction between an iterable and an iterator. An iterable, like a list or string, refers to anything you can loop over. Conversely, an iterator is a specific object designed to aid in looping over an iterable. Iterators grant access to individual items in the sequence one by one. The `next()` function plays a key role in advancing the iterator to the next item and retrieving it. For example:
+
+```python
+# Iterable: List
+my_list = [1, 2, 3, 4, 5]
+
+# You can loop over the list directly
+for item in my_list:
+    print(item)  # Output: 1, 2, 3, 4, 5
+```
+
+Iterator Example:
+
+```python
+# Iterable: List
+my_list = [1, 2, 3, 4, 5]
+
+# Get an iterator object from the iterable
+my_iterator = iter(my_list)
+
+# Use the iterator to get items one at a time
+print(next(my_iterator))  # Output: 1
+print(next(my_iterator))  # Output: 2
+print(next(my_iterator))  # Output: 3
+print(next(my_iterator))  # Output: 4
+print(next(my_iterator))  # Output: 5
+
+# After all items are exhausted, next() raises StopIteration
+# print(next(my_iterator))  # Uncommenting this line would raise StopIteration
+```
+
+__map():__ In Python, the `map()` function can transform any iterable, not just lists. It can operate on tuples, sets, dictionaries, strings, and other iterable objects. The function applies a specified function to each item in the iterable and returns an iterator containing the results.
+
+Example: Doubling each element in a list
+
+```python
+# Define a function to add 1 to a number
+def add_one(x):
+    return x + 1
+
+# Example: Using map with a list
+numbers = [1, 2, 3, 4, 5]
+
+# Apply add_one function to each item in the list using map
+mapped_numbers = map(add_one, numbers)
+
+# Convert the mapped_numbers iterator to a list (iterable)
+result = list(mapped_numbers)
+
+# Output the result
+print(result)  # Output: [2, 3, 4, 5, 6]
+```
+
+__filter():__ The `filter()` function in Python takes two arguments: a function and an iterable. It applies the function to each element in the iterable and returns an iterator containing only the elements for which the function returns `True`. If no function is provided, `filter()` uses the default behavior of considering truthy values for filtering.
+
+Example: Filtering even numbers from a list
+
+```python
+# Define a function to check if a number is even
+def is_even(x):
+    return x % 2 == 0
+
+# Example: Using filter with a list
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Apply is_even function to each item in the list using filter
+filtered_numbers = filter(is_even, numbers)
+
+# Convert the filtered_numbers iterator to a list (iterable)
+result = list(filtered_numbers)
+
+# Output the result
+print(result)  # Output: [2, 4, 6, 8, 10]
+```
+
+---
+
+### 15. Built-In Python mathematical features
+
+Python provides built-in mathematical constants and functions through the `math` module, which allows developers to perform a wide range of mathematical operations. This includes functions for trigonometry, logarithms, rounding, and more. Python makes it easy to handle complex mathematical computations efficiently.
+
+__Mathematical constants:__ Python's `math` module includes predefined constants for fundamental mathematical values, which can be accessed as follows:
+
+```python
+import math
+
+# Pi (π): Represents the ratio of the circumference of a circle to its diameter
+pi = math.pi  # Approximately 3.14159
+
+# Euler's number (e): Represents the base of the natural logarithm
+e = math.e  # Approximately 2.71828
+
+# Square root of 2 (√2): Represents the square root of 2
+sqrt2 = math.sqrt(2)  # Approximately 1.41421
+
+# Reciprocal of the square root of 2 (1/√2)
+sqrt1_2 = 1 / math.sqrt(2)  # Approximately 0.70711
+
+# Natural logarithm of 2 (ln(2))
+ln2 = math.log(2)  # Approximately 0.69315
+
+# Natural logarithm of 10 (ln(10))
+ln10 = math.log(10)  # Approximately 2.30259
+```
+
+__Mathematical functions:__ Python's `math` module offers a variety of functions for common mathematical operations. Here’s how to use them:
+
+```python
+import math
+
+# Exponentiation (math.pow)
+result = math.pow(2, 3)  # result equals 8 (2 raised to the power of 3)
+
+# Square Root (math.sqrt)
+square_root = math.sqrt(25)  # square_root equals 5 (square root of 25)
+
+# Absolute Value (abs)
+absolute_value = abs(-10)  # absolute_value equals 10 (absolute value of -10)
+
+# Trigonometric Functions: sine (math.sin), cosine (math.cos), tangent (math.tan)
+sine_value = math.sin(math.pi / 2)  # sine_value equals 1 (sin(π/2) is 1)
+cosine_value = math.cos(math.pi)  # cosine_value equals -1 (cos(π) is -1)
+tangent_value = math.tan(0)  # tangent_value equals 0 (tan(0) is 0)
+
+# Rounding: Round (round), Ceil (math.ceil), Floor (math.floor)
+rounded_number = round(4.6)  # rounded_number equals 5 (rounds to the nearest integer)
+ceiled_number = math.ceil(4.3)  # ceiled_number equals 5 (rounds up to the nearest integer)
+floored_number = math.floor(4.9)  # floored_number equals 4 (rounds down to the nearest integer)
+
+# Logarithmic Functions: Natural Logarithm (math.log), Base 10 Logarithm (math.log10)
+natural_log = math.log(math.e)  # natural_log equals 1 (ln(e) is 1)
+log_base10 = math.log10(100)  # log_base10 equals 2 (log10(100) is 2)
+```
+
+In Python, these constants and functions are part of the `math` module, which provides precise floating-point arithmetic for most practical programming tasks. The values, though approximations due to floating-point precision, are accurate enough for a wide range of applications.
+
+---
+
+### 16. Understanding 'in' Better
 
 In Python, the `in` keyword is used as an operator to test if a value is present in a sequence (such as a list, tuple, string, or set). It is not a reserved word like `if` or `for`, but rather an operator that checks for membership in a collection. The in operator works with a wide range of iterable types, making it a versatile tool for checking if an element exists within a any iterable. To exemplify:
 
@@ -885,7 +1052,7 @@ In each of these cases, the in operator is used to check if a specific element (
 
 ---
 
-### 14. Understanding Sets
+### 17. Understanding Sets
 
 A set in Python is an unordered collection of unique elements. It is defined by curly braces `{}` and can contain various data types such as integers, floats, strings, and even other sets or tuples. The key characteristics of a set are:
 
@@ -933,7 +1100,7 @@ Sets are versatile data structures that are commonly used in Python for various 
 
 ---
 
-### 15. Exploring Tuples
+### 18. Exploring Tuples
 
 A tuple in Python is a data structure that allows you to store a collection of elements. It is similar to a list, but unlike lists, tuples are immutable, which means once a tuple is created, its elements cannot be modified, added, or removed. Tuples are defined using parentheses `()` and can contain elements of different data types. Here are some key points about tuples and their common use cases:
 
@@ -1026,95 +1193,266 @@ Unpacking and packing are fundamental concepts in working with tuples and are of
 
 ---
 
-### 16. Processing Iterables with .map() and .filter() 
+### 19. Objects and Common Object Methods in Python
 
-Python provides powerful tools like `map()`, `filter()` (as well as many others) for processing iterables efficiently. These methods align with functional programming principles, promoting clarity, immutability, and composability in code. Benefits are:
-
-* Clarity: Expressive operations like mapping and filtering make code easier to understand.
-* Immutability: Working with immutable data structures reduces bugs and simplifies debugging.
-* Composability: Functions can be combined into pipelines for complex transformations.
-* Testability: Stateless functions facilitate unit testing, ensuring code reliability.
-* Parallelism: Functional programming supports parallel and concurrent execution, enhancing performance.
-
-By embracing these methods and principles, developers can craft cleaner, more efficient codebases that are easier to maintain and scale. 
-
-__Iterables vs. Iterators__: Before exploring `.map()` and `.filter()`, it's crucial to understand the concepts of iterators, as well as the distinction between an iterable and an iterator. An iterable, like a list or string, refers to anything you can loop over. Conversely, an iterator is a specific object designed to aid in looping over an iterable. Iterators grant access to individual items in the sequence one by one. The `next()` function plays a key role in advancing the iterator to the next item and retrieving it. For example:
+In Python, objects are collections of key-value pairs. Each key must be an immutable type (e.g., strings, numbers, tuples), and values can be any data type, including integers, strings, booleans, other objects, or functions. Python objects can be created using dictionaries (`dict`) or classes. 
 
 ```python
-# Iterable: List
-my_list = [1, 2, 3, 4, 5]
+# Creating a dictionary with key-value pairs
+person = {
+    'name': 'John',        
+    'age': 30,             
+    'address': {           
+        'city': 'New York',
+        'country': 'USA'
+    }
+}
 
-# You can loop over the list directly
-for item in my_list:
-    print(item)  # Output: 1, 2, 3, 4, 5
+# Accessing values using keys
+print(person['name'])           # Output: John
+print(person['address']['city']) # Output: New York
 ```
 
-Iterator Example:
+__Object Creation Using Classes:__
+
+Python classes allow you to define blueprints for objects with specific structures and behavior:
 
 ```python
-# Iterable: List
-my_list = [1, 2, 3, 4, 5]
+# Defining a class called 'Person'
+class Person:
+    # The constructor method (__init__) is called when a new object is created from the class. 
+    # It initializes the object's attributes with the value passed during object creation.
+    def __init__(self, name):
+        self.name = name  # Assigns the provided 'name' argument to the 'name' attribute of the object
+    
+    # Defining a method called 'greet' that prints a greeting message including the person's name.
+    def greet(self):
+        # Using an f-string to include the 'name' attribute in the printed message.
+        print(f"Hello, my name is {self.name}.")
 
-# Get an iterator object from the iterable
-my_iterator = iter(my_list)
 
-# Use the iterator to get items one at a time
-print(next(my_iterator))  # Output: 1
-print(next(my_iterator))  # Output: 2
-print(next(my_iterator))  # Output: 3
-print(next(my_iterator))  # Output: 4
-print(next(my_iterator))  # Output: 5
+# Creating an instance of the class
+person1 = Person("John")
 
-# After all items are exhausted, next() raises StopIteration
-# print(next(my_iterator))  # Uncommenting this line would raise StopIteration
+# Calling the greet method
+person1.greet()  # Output: Hello, my name is John.
 ```
 
-__map():__ In Python, the `map()` function can transform any iterable, not just lists. It can operate on tuples, sets, dictionaries, strings, and other iterable objects. The function applies a specified function to each item in the iterable and returns an iterator containing the results.
-
-Example: Doubling each element in a list
+Python supports inheritance, allowing classes to share behavior through a mechanism called the "method resolution order" (MRO):
 
 ```python
-# Define a function to add 1 to a number
-def add_one(x):
-    return x + 1
+# Example of inheritance
+class Person:
+    def __init__(self, name):
+        self.name = name
 
-# Example: Using map with a list
-numbers = [1, 2, 3, 4, 5]
+class Employee(Person):
+    def greet(self):
+        print(f"Hello, I am {self.name}, and I work here!")
 
-# Apply add_one function to each item in the list using map
-mapped_numbers = map(add_one, numbers)
-
-# Convert the mapped_numbers iterator to a list (iterable)
-result = list(mapped_numbers)
-
-# Output the result
-print(result)  # Output: [2, 3, 4, 5, 6]
+employee = Employee("Alice")
+employee.greet()  # Output: Hello, I am Alice, and I work here!
 ```
 
-__filter():__ The `filter()` function in Python takes two arguments: a function and an iterable. It applies the function to each element in the iterable and returns an iterator containing only the elements for which the function returns `True`. If no function is provided, `filter()` uses the default behavior of considering truthy values for filtering.
+__Common Object Methods in Python:__
 
-Example: Filtering even numbers from a list
+**`dict.fromkeys()` Method**: This method creates dictionaries from keys with default values:
 
 ```python
-# Define a function to check if a number is even
-def is_even(x):
-    return x % 2 == 0
+keys = ['name', 'age', 'city']
+person = dict.fromkeys(keys, None)
+print(person)  # Output: {'name': None, 'age': None, 'city': None}
+```
 
-# Example: Using filter with a list
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+__Built-in Dictionary Methods:__
 
-# Apply is_even function to each item in the list using filter
-filtered_numbers = filter(is_even, numbers)
+**`copy()`**: Creates a shallow copy of a dictionary.
 
-# Convert the filtered_numbers iterator to a list (iterable)
-result = list(filtered_numbers)
+```python
+source = {'foo': 1, 'bar': 2}
+target = source.copy()
+print(target)  # Output: {'foo': 1, 'bar': 2}
+```
 
-# Output the result
-print(result)  # Output: [2, 4, 6, 8, 10]
+**`update()`**: Merges properties from one dictionary into another.
+
+```python
+target = {'number': 10}
+source = {'foo': 1, 'bar': 2}
+target.update(source)
+print(target)  # Output: {'number': 10, 'foo': 1, 'bar': 2}
+```
+
+**`setdefault()`**: Inserts a key with a default value if the key is not already present.
+
+```python
+person = {'name': 'John'}
+person.setdefault('age', 30)
+print(person)  # Output: {'name': 'John', 'age': 30}
+```
+
+__Dictionary Iteration:__
+
+**`for` Loop**: Iterate over dictionary keys.
+
+```python
+person = {'name': 'John', 'age': 30}
+for key in person:
+    print(key, person[key])  # Output: name John, age 30
+```
+
+**`keys()` Method**: Returns the dictionary's keys.
+
+```python
+print(person.keys())  # Output: dict_keys(['name', 'age'])
+```
+
+**`values()` Method**: Returns the dictionary's values.
+
+```python
+print(person.values())  # Output: dict_values(['John', 30])
+```
+
+**`items()` Method**: Returns key-value pairs as tuples.
+
+```python
+print(person.items())  # Output: dict_items([('name', 'John'), ('age', 30)])
+```
+
+__Dictionary Unpacking:__ Python allows dictionary unpacking, similar to destructuring.
+
+```python
+person = {'name': 'John', 'age': 30, 'city': 'New York'}
+name, age, city = person.values()
+
+print(name)  # Output: John
+print(age)   # Output: 30
+print(city)  # Output: New York
+```
+
+__Merging Dictionaries:__ You can merge dictionaries using the `**` (double asterisk) operator:
+
+```python
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'c': 3, 'd': 4}
+
+merged_dict = {**dict1, **dict2}
+print(merged_dict)  # Output: {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+```
+
+__Working with JSON in Python:__
+
+Python's `json` module provides tools for serializing and deserializing JSON data.
+
+**`json.dumps()`**: Converts a Python dictionary into a JSON string.
+
+```python
+import json
+person = {'name': 'John', 'age': 30}
+json_data = json.dumps(person)
+print(json_data)  # Output: '{"name": "John", "age": 30}'
+```
+
+**`json.loads()`**: Parses a JSON string into a Python dictionary.
+
+```python
+json_data = '{"name": "John", "age": 30}'
+person = json.loads(json_data)
+print(person['name'])  # Output: John
 ```
 
 ---
 
+### 20. A better understanding of `None` and missing values
+
+In Python, `None` is used to represent the absence of a value. It is the default value for variables and object attributes when they are not explicitly initialized with a value. Assigning `None` to a variable signifies that it holds no value intentionally.
+
+For example:
+
+```python
+# Variable with no value
+user_name = None
+
+if user_name is None:
+    print("No username provided")  # Output: No username provided
+```
+
+Dealing with `None` in Python:
+
+When working with objects or dictionaries, you may encounter cases where a value is `None`. Python offers several ways to handle this safely, such as using the `.get()` method for dictionaries or conditional expressions to provide default values.
+
+Example using dictionary and `.get()` method for default values:
+
+The `.get()` method allows for safe access to a key without causing an error if the key doesn't exist or holds a `None` value. You can also specify a default value to return if the key is missing or `None`.
+
+```python
+user = {
+    "address": {
+        "city": "New York"
+    }
+}
+
+# Accessing city property safely
+city = user.get("address", {}).get("city", "Unknown City") 
+# If "address" doesn't exist, an empty dictionary {} is returned as a default.
+
+print("City:", city)  # Output: 'New York'
+```
+
+If the `address` key or the `city` within `address` is missing or holds `None`, the default `"Unknown City"` will be returned.
+
+Using conditional expressions (ternary operators):
+
+Another approach in Python is using conditional expressions to check for `None` and provide default values:
+
+```python
+# Checking for None and providing a default value
+postal_code = user.get("address", {}).get("postalCode", None)
+postal_code = postal_code if postal_code is not None else "N/A"
+print("Postal code:", postal_code)  # Output: 'N/A'
+```
+
+Checking for `None`:
+
+In Python, the recommended way to check for `None` is using `is None` or `is not None`. This is a clear and explicit way to determine if a variable or value is `None`.
+
+```python
+# Recommended way to check for None
+postal_code = user.get("address", {}).get("postalCode", None)
+is_postal_code_none = postal_code is None
+print("Is postal code None?", is_postal_code_none)  # Output: True
+```
+
+Handling default values with logical OR (`or`):
+
+Python’s `or` operator can be used to provide default values when a variable or dictionary key holds a falsy value (e.g., `None`, `0`, `False`, or an empty string).
+
+```python
+user = {"name": "John", "city": None}
+
+# Logical or for default values
+name = user.get("name") or "Anonymous"  # Output: 'John'
+city = user.get("city") or "Unknown City"  # Output: 'Unknown City'
+print(f"Name: {name}, City: {city}")
+```
+
+In this case, the right-hand side of the `or` expression is returned if the left-hand side is falsy.
+
+Type and Boolean Values of `None`:
+
+The `None` value in Python is of type `NoneType`. In boolean contexts, `None` behaves like a falsy value.
+
+```python
+# Checking type of None
+print(type(None))  # Output: <class 'NoneType'>
+
+# Boolean opposite of None is True
+print(not None)  # Output: True
+```
+
+However, it’s best to avoid using `not` for checking `None` and use explicit comparisons (`is None`) for clarity.
+
+---
 
 ### BONUS - Installing and running Python on your machine
 
@@ -1132,7 +1470,7 @@ c. Run the downloaded installer and follow the on-screen instructions to complet
 
 d. After installation, open the terminal (Command Prompt on Windows, Terminal on macOS and Linux) and type `python --version` to verify if Python was installed correctly and which version is being run.
 
-By now, we can run Python directly from the command line by using the python command. This opens the Python interpreter, indicated by the `>>>` prompt. From here, we can execute Python commands. For example, typing `2 + 3` will display `5` in the terminal. To exit the Python interpreter, we can type `exit()` or press Ctrl + Z followed by ENTER.
+By now, we can run Python directly from the command line by using the python command. This opens the Python interpreter, indicated by the `>>>` prompt. From here, we can execute Python commands. For example, typing `2 + 3` will display `5` in the terminal. To exit the Python interpreter, we can type `ex()` or press Ctrl + Z followed by ENTER.
 
 2. __Installing Visual Studio Code and Essential Plugins for Python Development__
 

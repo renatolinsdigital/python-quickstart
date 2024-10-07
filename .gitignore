@@ -1,4 +1,5 @@
 *.py
+*.js
 TODO.txt
 Pipfile
 Pipfile.lock
