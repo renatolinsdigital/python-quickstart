@@ -14,6 +14,21 @@ Python was initially created by Guido van Rossum in 1991 with the intention of c
 - [8. Control flow III - Loops](#8-control-flow-iii---loops)
 - [9. Control flow IV - match-case statements](#9-control-flow-iv---match-case-statements)
 - [10. Basics of functions](#10-basics-of-functions)
+- [11. String Manipulation & Formatting](#11-string-manipulation--formatting)
+- [12. Scope I: Types of Scope](#12-scope-i-types-of-scope)
+- [13. Scope II: Keywords and best practices](#13-scope-ii-keywords-and-best-practices)
+- [14. Processing Iterables with .map() and .filter() ](#14-processing-iterables-with-map-and-filter-)
+- [15. Built-In Python mathematical features](#15-built-in-python-mathematical-features)
+- [16. Understanding 'in' Better](#16-understanding-in-better)
+- [17. Understanding Sets](#17-understanding-sets)
+- [18. Exploring Tuples](#18-exploring-tuples)
+- [19. Objects and Common Object Methods in Python](#19-objects-and-common-object-methods-in-python)
+- [20. A better understanding of `None` and missing values](#20-a-better-understanding-of-none-and-missing-values)
+- [21. Error Handling in Python](#21-error-handling-in-python)
+- [22. Asynchronous Programming in Python](#22-asynchronous-programming-in-python)
+- [23. Imperative vs. Declarative Paradigms and Immutability in Python](#23-imperative-vs-declarative-paradigms-and-immutability-in-python)
+- [Proposed exercises and answers](#proposed-exercises-and-answers)
+- [BONUS - Installing and running Python on your machine](#bonus---installing-and-running-python-on-your-machine)
 
 ---
 
@@ -1377,7 +1392,7 @@ if user_name is None:
     print("No username provided")  # Output: No username provided
 ```
 
-Dealing with `None` in Python:
+#### Dealing with `None` in Python
 
 When working with objects or dictionaries, you may encounter cases where a value is `None`. Python offers several ways to handle this safely, such as using the `.get()` method for dictionaries or conditional expressions to provide default values.
 
@@ -1412,7 +1427,7 @@ postal_code = postal_code if postal_code is not None else "N/A"
 print("Postal code:", postal_code)  # Output: 'N/A'
 ```
 
-Checking for `None`:
+#### Checking for `None`
 
 In Python, the recommended way to check for `None` is using `is None` or `is not None`. This is a clear and explicit way to determine if a variable or value is `None`.
 
@@ -1423,7 +1438,7 @@ is_postal_code_none = postal_code is None
 print("Is postal code None?", is_postal_code_none)  # Output: True
 ```
 
-Handling default values with logical OR (`or`):
+#### Handling default values with logical OR (`or`)
 
 Python’s `or` operator can be used to provide default values when a variable or dictionary key holds a falsy value (e.g., `None`, `0`, `False`, or an empty string).
 
@@ -1438,7 +1453,7 @@ print(f"Name: {name}, City: {city}")
 
 In this case, the right-hand side of the `or` expression is returned if the left-hand side is falsy.
 
-Type and Boolean Values of `None`:
+#### Type and Boolean Values of `None`
 
 The `None` value in Python is of type `NoneType`. In boolean contexts, `None` behaves like a falsy value.
 
@@ -1451,6 +1466,385 @@ print(not None)  # Output: True
 ```
 
 However, it’s best to avoid using `not` for checking `None` and use explicit comparisons (`is None`) for clarity.
+
+---
+
+### 21. Error Handling in Python
+
+Error handling is a crucial aspect of writing robust Python code. It involves anticipating and managing errors that can occur during the execution of a program. By properly handling errors, we can prevent your application from crashing and provide users with informative feedback.
+
+#### Techniques for Handling Errors
+
+1. **Try-Except Statements**
+
+   The `try-except` statement is the primary way to handle exceptions in Python. It allows you to write code that might raise an error inside the `try` block, and if an error occurs, the control is passed to the `except` block, where you can handle the error.
+
+   ```python
+   try:
+       # Code that may raise an error
+       result = risky_function()
+       print(result)
+   except Exception as error:
+       # Handle the error
+       print(f"An error occurred: {error}")
+   ```
+
+   In this example, if `risky_function()` raises an error, it will be caught in the `except` block, allowing you to log or display an error message without crashing the entire program.
+
+2. **Finally Block**
+
+   You can also use a `finally` block along with `try-except`. The code inside the `finally` block will execute regardless of whether an error was raised or not. This is useful for cleaning up resources, such as closing files or releasing locks.
+
+   ```python
+   try:
+       # Code that may raise an error
+       data = fetch_data()
+       print(data)
+   except Exception as error:
+       print(f"An error occurred: {error}")
+   finally:
+       # This block will run no matter what
+       print("Cleanup operations.")
+   ```
+
+3. **Raising Errors**
+
+   You can create your own error conditions in the code by using the `raise` statement. This allows you to generate custom error messages based on specific conditions.
+
+   ```python
+   def divide(a, b):
+       if b == 0:
+           raise ValueError("Cannot divide by zero.")
+       return a / b
+
+   try:
+       print(divide(10, 0))
+   except ValueError as error:
+       print(f"Error: {error}")
+   ```
+
+#### Understanding Common Error Types
+
+Python has several built-in error types that you may encounter:
+
+1. **SyntaxError**: Occurs when there is a syntax mistake in the code, such as missing parentheses or colons.
+   - Example: `a =  # SyntaxError: invalid syntax`
+
+2. **NameError**: Happens when a variable that does not exist is referenced.
+   - Example: `print(non_existent_variable)  # NameError: name 'non_existent_variable' is not defined`
+
+3. **TypeError**: Indicates an operation was performed on a value of the wrong type, such as trying to add a string to an integer.
+   - Example: `result = "string" + 5  # TypeError: can only concatenate str (not "int") to str`
+
+4. **ValueError**: Raised when a function receives an argument of the right type but with an invalid value.
+   - Example: `int("abc")  # ValueError: invalid literal for int() with base 10: 'abc'`
+
+5. **IndexError**: Triggered when trying to access an index that is out of range for a list or array.
+   - Example: `my_list = [1, 2, 3]; print(my_list[5])  # IndexError: list index out of range`
+
+By implementing proper error handling techniques, we enhance the quality, reliability, and user experience of our Python applications.
+
+---
+
+Sure! Here’s a comprehensive tutorial on asynchronous programming in Python, focusing on using the `aiohttp` library for making asynchronous API calls. This version will also address how to properly manage the session to avoid unclosed connector errors.
+
+---
+
+### 22. Asynchronous Programming in Python
+
+Asynchronous programming allows your code to execute multiple tasks concurrently without blocking the main thread. This is particularly useful when dealing with I/O-bound tasks, such as making API calls or reading files, where the program would typically wait for the operation to complete before proceeding. By using asynchronous code, you can improve the efficiency and responsiveness of your applications.
+
+#### Key Concepts
+
+1. **Asynchronous Functions**: Defined with `async def`, these functions can use the `await` keyword to pause their execution until an awaited task is completed.
+
+2. **Awaiting Tasks**: The `await` keyword is used to pause the execution of an asynchronous function until the awaited asynchronous task is finished.
+
+3. **Event Loop**: The event loop orchestrates the execution of asynchronous functions and manages the execution of I/O operations.
+
+#### Using `aiohttp` for Asynchronous API Calls
+
+The `aiohttp` library allows you to make HTTP requests asynchronously. When using `aiohttp`, it is crucial to manage the session properly to avoid errors related to unclosed connections.
+
+#### Code Implementation
+
+Here’s a complete example that demonstrates how to fetch user data from a public API using `aiohttp`, while ensuring the session is properly managed:
+
+```python
+import aiohttp
+import asyncio
+
+async def fetch_data(url):
+    # Create a session
+    async with aiohttp.ClientSession() as session:
+        # Make the GET request
+        async with session.get(url) as response:
+            # Check if the response status is OK (200)
+            if response.status == 200:
+                # Parse the JSON response
+                data = await response.json()
+                return data
+            else:
+                # Raise an error for unsuccessful responses
+                raise Exception(f"Failed to fetch data: {response.status}")
+
+async def main():
+    # API endpoint to fetch user data
+    api_url = "https://jsonplaceholder.typicode.com/users/1"  # Example for a single user
+    try:
+        # Await the API call
+        data = await fetch_data(api_url)
+        print(data)  # Handle the successful result
+    except Exception as error:
+        print(error)  # Handle any errors that occur
+
+# Run the asynchronous main function
+asyncio.run(main())
+```
+
+#### Explanation of the Code
+
+1. **Creating an Asynchronous Function**:
+   - The `fetch_data` is an asynchronous function, making it capable of handling asynchronous operations.
+
+2. **Creating and Managing a Session**:
+   - An `aiohttp.ClientSession` is created using an `async with` statement. This ensures that the session is automatically closed when the block is exited, preventing warnings about unclosed connectors.
+
+3. **Making an API Call**:
+   - The line `async with session.get(url) as response` sends a GET request to the specified URL. The `await` keyword pauses the function's execution until the response is received, allowing other tasks to run concurrently.
+
+4. **Handling the Response**:
+   - After receiving the response, we check if the status code is 200 (OK). If so, we parse the JSON data using `await response.json()`. If the status is not OK, an exception is raised.
+
+5. **Error Handling**:
+   - The `try-except` block in the `main` function catches any exceptions that occur during the API call, allowing for effective error handling and debugging.
+
+#### Running Multiple API Calls Concurrently
+
+You can also make multiple API calls concurrently by creating tasks for each URL and using `asyncio.gather()`. Here’s how:
+
+```python
+async def main():
+    # List of API endpoints to fetch user data
+    urls = [
+        "https://jsonplaceholder.typicode.com/users/1",
+        "https://jsonplaceholder.typicode.com/users/2",
+        "https://jsonplaceholder.typicode.com/users/3"
+    ]
+
+    # Create tasks for multiple API calls
+    tasks = [fetch_data(url) for url in urls]
+
+    try:
+        # Await all tasks concurrently
+        results = await asyncio.gather(*tasks)
+        
+        # Print each result
+        for result in results:
+            print(result)
+    except Exception as error:
+        print(error)  # Handle any errors
+
+# Run the main function
+asyncio.run(main())
+```
+
+#### Key Points
+
+- **Concurrency**: By using `asyncio.gather()`, you can initiate multiple API calls concurrently, improving the efficiency of your program.
+- **Session Management**: Using `async with` for `ClientSession` ensures proper resource management, avoiding errors or warnings about unclosed connectors.
+- **Error Handling**: Errors during API calls can be caught and handled gracefully using `try-except` blocks.
+
+---
+
+Here's the revised version of your tutorial on **Imperative vs. Declarative Paradigms and Immutability in Python** with an emphasis on best practices:
+
+---
+
+### 23. Imperative vs. Declarative Paradigms and Immutability in Python
+
+#### Imperative Programming
+
+Imperative programming involves giving explicit instructions on how to achieve a desired outcome. This paradigm emphasizes the sequence of statements to change the program's state, which can lead to more complex and less readable code.
+
+**Example of Imperative Programming:**
+
+```python
+numbers = [1, 2, 3, 4, 5]
+squared = []
+
+# Using a for loop to square each number
+for num in numbers:
+    squared.append(num * num)
+
+print(squared)  # Output: [1, 4, 9, 16, 25]
+```
+
+In this example, we explicitly define how to loop through the array and update the results, which can lead to more verbose code.
+
+#### Declarative Programming
+
+This programming paradigm emphasizes *what* the program should accomplish rather than *how* to accomplish it. In Python, declarative programming is often implemented through high-level functions, list comprehensions, and libraries such as `pandas` or `SQLAlchemy` for data manipulation.
+
+**Example of Declarative Programming:**
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+# Using list comprehension to create a new list with squared values
+squared = [num ** 2 for num in numbers]
+print(squared)  # Output: [1, 4, 9, 16, 25]
+```
+
+In this example, we succinctly express our intention to transform an array of numbers into their squares without explicitly iterating through the array.
+
+#### Immutability
+
+**Immutability** refers to the concept of data that cannot be changed after it is created. This practice is particularly important in functional programming and helps to avoid unintended side effects, making programs more predictable.
+
+**Example of Immutability:**
+
+```python
+original_tuple = (1, 2, 3)
+
+# Creating a new tuple instead of modifying the original
+new_tuple = tuple(num * 2 for num in original_tuple)
+
+print(original_tuple)  # Output: (1, 2, 3)
+print(new_tuple)       # Output: (2, 4, 6)
+```
+
+Here, `original_tuple` remains unchanged, while `new_tuple` is a new tuple that reflects the transformation, demonstrating immutability.
+
+#### Related Best Practices
+
+- **Use Imperative Programming When:**
+  - Performance is critical, and low-level control is needed.
+  - Detailed state management is necessary for complex applications.
+
+- **Use Declarative Programming When:**
+  - Code readability and maintainability are priorities.
+  - Data transformation tasks can be expressed clearly.
+
+- **Avoid State Changes When:**
+  - Predictability and stability are key concerns.
+  - Debugging complex systems is challenging.
+
+- **While avoiding state changes:**
+  - **Use Tuples and Frozensets:** Prefer immutable types like tuples or frozen sets instead of lists or sets to ensure data integrity.
+  - **Create New Instances:** Instead of modifying existing data structures, create new ones to reflect changes, promoting a clearer understanding of data flow and transformations.
+
+By adhering to these best practices, developers can create more maintainable and readable code in professional applications, leading to better collaboration and efficiency in software development.
+
+---
+
+### Proposed exercises and answers
+
+##### 1. Type Conversion
+
+Create a variable `num_string` with the string value `"456"`. Convert this string to an integer and multiply it by 5. Print the result.
+
+**Tip**: Use the built-in Python function that can convert strings to integers.
+
+##### 2. Conditional Statement
+
+Write a program that checks if a number stored in a variable `x` is even or odd. Print `"Even"` if it is even, otherwise print `"Odd"`.
+
+##### 3. Loop to Sum Numbers
+
+Write a loop that sums all numbers from 1 to 50 and prints the result.
+
+**Tip**: Use a `for` loop to iterate over numbers from 1 to 50 and keep a running total.
+
+##### 4. Match-Case Statement
+
+Create a program that takes a variable `day` (with values from 1 to 7) and prints the corresponding day of the week (1 = "Monday", 2 = "Tuesday", etc.) using a match-case statement.
+
+**Tip**: Use the `match` statement to map each number to a day of the week.
+
+##### 5. Function to Convert Temperature
+
+Write a function `convert_to_fahrenheit` that takes a temperature in Celsius as an argument and returns the equivalent temperature in Fahrenheit. Use the formula: `F = C * 9/5 + 32`.
+
+**Tip**: The function should accept one argument and return a value.
+
+##### 6. String Manipulation
+
+Write a program that takes a sentence as input, splits it into words, and logs each word separately in uppercase.
+
+**Tip**: Use Python string methods like `split()` and `upper()`.
+
+##### 7. Full Name Formatter
+
+Create a Python program that accepts a full name input from the user, processes it to ensure proper formatting, and returns a greeting. The program should handle names with multiple parts and ensure each part is properly capitalized.
+
+**Tip**: Use list comprehensions to format the name parts.
+
+#### Answers (Try to do before checking these solutions)
+
+```python
+# 1. Type Conversion
+num_string = "456"
+result = int(num_string) * 5
+print(result)  # Output: 2280
+
+# 2. Conditional Statement
+x = 4
+if x % 2 == 0:
+    print("Even")
+else:
+    print("Odd")  # Output: Even
+
+# 3. Loop to Sum Numbers
+total_sum = 0
+for i in range(1, 51):
+    total_sum += i
+print(total_sum)  # Output: 1275
+
+# 4. Match-Case Statement
+day = 3
+match day:
+    case 1:
+        print("Monday")
+    case 2:
+        print("Tuesday")
+    case 3:
+        print("Wednesday")
+    case 4:
+        print("Thursday")
+    case 5:
+        print("Friday")
+    case 6:
+        print("Saturday")
+    case 7:
+        print("Sunday")
+    case _:
+        print("Invalid day")  # Output: Wednesday
+
+# 5. Function to Convert Temperature
+def convert_to_fahrenheit(celsius):
+    return celsius * 9 / 5 + 32
+
+print(convert_to_fahrenheit(30))  # Output: 86.0
+
+# 6. String Manipulation
+sentence = input("Enter a sentence: ")  # e.g. "python programming is fun"
+words = sentence.split()
+for word in words:
+    print(word.upper())
+# Example Output:
+# PYTHON
+# PROGRAMMING
+# IS
+# FUN
+
+# 7. Full Name Formatter
+full_name = input("Please enter your full name: ")  # e.g. "alice johnson"
+name_parts = full_name.split()
+formatted_parts = [part.capitalize() for part in name_parts]
+formatted_name = " ".join(formatted_parts)
+print(f"Hello, {formatted_name}!")  # Output: Hello, Alice Johnson!
+``` 
 
 ---
 
