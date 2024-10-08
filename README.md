@@ -1910,7 +1910,7 @@ Create a Python program that accepts a full name input from the user, processes 
 
 **Tip**: Use list comprehensions to format the name parts.
 
-#### Answers (Try to do before checking these solutions)
+#### Answers (Try to solve yourself before checking these solutions)
 
 ```python
 # 1. Type Conversion
