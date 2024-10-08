@@ -1824,31 +1824,47 @@ def add(x, y):
 print(add(5, 10))  # Output: 15
 ```
 
-**b. Be Cautious with Mutable Default Arguments**: Using mutable default arguments can lead to unexpected behavior. Instead, use `None` as the default and initialize the mutable object inside the function:
+**b. Be Cautious with Mutable Default Arguments**: Using mutable default arguments can introduce subtle bugs that are hard to identify. Always use `None` as the default and initialize the mutable object inside the function.
 
-**Common Pitfall**:
+Common Pitfall:
 
-```python
-def append_to_list(item, lst=[]):
-    lst.append(item)
-    return lst
-
-print(append_to_list(1))  # Output: [1]
-print(append_to_list(2))  # Output: [1, 2] (unexpected behavior)
-```
-
-**Correct Usage**:
+Consider a function designed to track user preferences, like setting themes:
 
 ```python
-def append_to_list(item, lst=None):
-    if lst is None:
-        lst = []
-    lst.append(item)
-    return lst
+def set_user_preferences(theme, preferences={}):
+    preferences['theme'] = theme  # Modifies the shared default dictionary
+    return preferences
 
-print(append_to_list(1))  # Output: [1]
-print(append_to_list(2))  # Output: [2]
+# Simulate different users
+user1_prefs = set_user_preferences("dark")  # User 1 sets dark theme
+user2_prefs = set_user_preferences("light")  # User 2 sets light theme
+
+print(user1_prefs)  # Output: {'theme': 'light'} (unexpectedly shows light)
+print(user2_prefs)  # Output: {'theme': 'light'} (expected to show light)
 ```
+
+Here, both users are supposed to have separate preferences. However, because `preferences` is a mutable default argument, both function calls share the same dictionary. The second user’s preference overwrites the first user's theme.
+
+Correct Usage:
+
+To avoid this issue, use `None` as the default value:
+
+```python
+def set_user_preferences(theme, preferences=None):
+    if preferences is None:
+        preferences = {}  # Initialize a new dictionary if needed
+    preferences['theme'] = theme  # Set the theme
+    return preferences
+
+# Simulate different users
+user1_prefs = set_user_preferences("dark")  # User 1 sets dark theme
+user2_prefs = set_user_preferences("light")  # User 2 sets light theme
+
+print(user1_prefs)  # Output: {'theme': 'dark'} (as expected)
+print(user2_prefs)  # Output: {'theme': 'light'} (as expected)
+```
+
+Using `None` for mutable default arguments prevents shared state across function calls, avoiding unexpected behavior and bugs, particularly in cases where multiple users or contexts are involved.
 
 ---
 
